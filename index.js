@@ -2085,7 +2085,7 @@ $('.cid').each(function(){
  $.ajax({
  type: "POST",
  data: {DA1_CARD:DA1_CARD, DA1_MPID:DA1_MPID, DA1_CPID:DA1_CPID, C_ID:C_ID, CC_NAME:CC_NAME, C_NAME:C_NAME, C_M_NAME:C_M_NAME, C_F_NAME:C_F_NAME, C_DOB:C_DOB,  C_AGE:C_AGE, C_SEX:C_SEX, C_CHP:C_CHP, V_DATE:V_DATE, V_TIME:V_TIME, Q_201:Q_201, Q_202:Q_202, Q_203:Q_203, Q_204:Q_204, Q_205:Q_205, Q_206:Q_206, Q_207:Q_207, Q_208:Q_208, Q_209:Q_209, Q_210:Q_210, EN_TIME:EN_TIME, EN_USER:EN_USER, EN_DATE:EN_DATE },
- url:"http://27.147.225.171:8080/DAS_Data/dataPost.php",
+ url:"server/DAS_Data/dataPost.php",
  crossDomain: true,
  cache: false,
  success: function(data){
@@ -2337,7 +2337,7 @@ $('.DA2_EnDt').each(function(){DA2_EnDt.push($(this).text());});
 
  $.ajax({
  type: "POST",
- url:"http://27.147.225.171:8080/DAS_Data/dataD2.php",
+ url:"serever/DAS_Data/dataD2.php",
  data: {Child_ID:Child_ID,
         Upazila_Code:Upazila_Code,
         Union_code:Union_code,
@@ -2569,7 +2569,7 @@ $('.Entry_Date').each(function(){Entry_Date.push($(this).text());});
 
   $.ajax({
   type: "POST",
-  url:"http://27.147.225.171:8080/DAS_Data/dataD3.php",
+  url:"server/DAS_Data/dataD3.php",
   data: {DA3_childID:DA3_childID,
          DA3_Q101_code:DA3_Q101_code ,
          DA3_Q102_code:DA3_Q102_code ,
@@ -6034,7 +6034,7 @@ document.getElementById("totalMasterChildSaved").value="";
 var c=document.getElementById("PCV_cluster_new").value;
 //var b=document.getElementById("PCV_block").value;
 
-           var url = "http://27.147.225.171:8080/DAS_data/getPCV_Data.php?c="+c;
+           var url = "server/DAS_data/getPCV_Data.php?c="+c;
 //var url = "http://localhost:8081/Das_Study/getPCV_Data.php?c="+c;
            $.getJSON(url, function(result) {
 
@@ -6217,7 +6217,7 @@ document.getElementById("totalVillageUploaded").value="";
 var c=document.getElementById("PCV_cluster_new").value;
 //var b=document.getElementById("PCV_block").value;
 
-           var url = "http://27.147.225.171:8080/DAS_data/getPCV_Village_Data.php?c="+c;
+           var url = "server/DAS_data/getPCV_Village_Data.php?c="+c;
            $.getJSON(url, function(result) {
 
                $.each(result, function(i, field) {
@@ -6288,7 +6288,7 @@ var c=document.getElementById("PCV_cluster_new").value;
       var c=document.getElementById("PCV_cluster").value;
       //var b=document.getElementById("PCV_block").value;
 
-                 var url = "http://27.147.225.171:8080/DAS_data/getPCV_Bari_Data.php?c="+c;
+                 var url = "server/DAS_data/getPCV_Bari_Data.php?c="+c;
                  $.getJSON(url, function(result) {
 
                      $.each(result, function(i, field) {
@@ -6353,7 +6353,7 @@ var c=document.getElementById("PCV_cluster_new").value;
       var c=document.getElementById("PCV_cluster").value;
       //var b=document.getElementById("PCV_block").value;
 
-                 var url = "http://27.147.225.171:8080/DAS_data/getPCV_HH_Data.php?c="+c;
+                 var url = "server/DAS_data/getPCV_HH_Data.php?c="+c;
                  $.getJSON(url, function(result) {
 
                      $.each(result, function(i, field) {
@@ -6572,7 +6572,7 @@ document.getElementById("totalD1SCRSaved").value ="";
 var c=document.getElementById("Restore_CC").value;
 //var b=document.getElementById("PCV_block").value;
 
-           var url = "http://27.147.225.171:8080/DAS_data/getD1_Data_restore.php?c="+c;
+           var url = "server/getD1_Data_restore.php?c="+c;
 //var url = "http://localhost:8081/Das_Study/getPCV_Data.php?c="+c;
            $.getJSON(url, function(result) {
 
@@ -6749,7 +6749,7 @@ $('.Entry_Date').each(function(){Entry_Date.push($(this).text());});
       var c=document.getElementById("Restore_CC").value;
       //var b=document.getElementById("PCV_block").value;
 
-                 var url = "http://27.147.225.171:8080/DAS_data/getD2_Data_restore.php?c="+c;
+                 var url = "server/DAS_data/getD2_Data_restore.php?c="+c;
       //var url = "http://localhost:8081/Das_Study/getPCV_Data.php?c="+c;
                  $.getJSON(url, function(result) {
 
@@ -7208,7 +7208,7 @@ $('.Entry_Date').each(function(){Entry_Date.push($(this).text());});
       var c=document.getElementById("Restore_CC").value;
       //var b=document.getElementById("PCV_block").value;
 
-                 var url = "http://27.147.225.171:8080/DAS_data/getD3_Data_restore.php?c="+c;
+                 var url = "server/DAS_data/getD3_Data_restore.php?c="+c;
       //var url = "http://localhost:8081/Das_Study/getPCV_Data.php?c="+c;
                  $.getJSON(url, function(result) {
 
@@ -7909,7 +7909,7 @@ document.getElementById("masterDataTotal").value="";
 document.getElementById("masterDataTotal_En").value="";
    online = window.navigator.onLine;
     if (navigator.onLine) {
-            var url = "http://27.147.225.171:8080/DAS_Data/getPCV_Data_update.php?c=";
+            var url = "server/DAS_Data/getPCV_Data_update.php?c=";
            $.getJSON(url, function(result) {
 
                $.each(result, function(i, field) {
