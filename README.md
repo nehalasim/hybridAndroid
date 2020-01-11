@@ -36,3 +36,12 @@ The study manager needs to check data on a daily basis. So it is difficult to ge
 
 # Sample code
 Sample source file is provided. This is the only CC part of the system. Server side coding is in the PHP.(Only for CC part of the system)
+
+# System File description
+JavaScrip File -- These files are used for data validation, database development and data handling.<br/>
+PHP FIle -- These files used in server side to store and restore and to retrive data.<br/>
+HTML File -- is a system UI file.<br/>
+XML file -- for android configaration.<br/>
+CSS files -- for designing the user interface
+
+
