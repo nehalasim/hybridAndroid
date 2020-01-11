@@ -720,7 +720,7 @@ document.getElementById("CorrectedIDSync").innerHTML="";
     if (navigator.onLine) {
 
 
-           var url = "http://27.147.225.171:8080/DAS_data/getCorrectedIDData.php";
+           var url = "Server/DAS_data/getCorrectedIDData.php";
 
            $.getJSON(url, function(result) {
 
