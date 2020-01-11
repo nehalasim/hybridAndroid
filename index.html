@@ -1,0 +1,3994 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+
+
+
+        <link rel="stylesheet" href="css/CustomizeTheme.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+
+        <!-- Include meta tag to ensure proper rendering and touch zooming -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Include jQuery Mobile stylesheets -->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+
+        <!-- Include the jQuery library -->
+        <script src="js/jquery-1.11.3.min.js"></script>
+
+        <!-- Include the jQuery Mobile library -->
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+        <script type="text/javascript" src="js/databaseHandler.js"></script>
+        <script type="text/javascript" src="js/productHandler.js"></script>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/pouchdb.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+
+
+
+        <link rel="stylesheet" type="text/css" href="css/datePicker/anypicker-font.css" />
+        <link rel="stylesheet" type="text/css" href="css/datePicker/anypicker.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/datePicker/anypicker-ios.css" />
+        <link rel="stylesheet" type="text/css" href="css/datePicker/anypicker-android.css" />
+        <link rel="stylesheet" type="text/css" href="css/datePicker/anypicker-windows.css" />
+
+        <script type="text/javascript" src="js/DatePicker/anypicker.js"></script>
+
+    </head>
+    <body>
+<!--status bar-->
+    <div id="statusBar" style=" display:none; margin-top:-51vw; z-index:99999; position:absolute; font-size:1.3vw; height:auto; overflow:hidden; text-align:center; font-weight:bold; width:100%;">
+
+        <div style="font-size:1vw; line-height:3vw; height:51vw; width:100%; background-color:#42aaff; margin-left:0vw; float:left; border-bottom-right-radius:0.5vw; border-bottom-left-radius:0.5vw;">
+
+            <!--button container-->
+            <div style="height:4vw; font-size:1.5vw; width:100%; margin-top:4vw; float:left;">
+                <div id="generalTabButton" style=" width:12vw; float:left; margin-left:10vw;border-radius:0.3vw; background-color:#CCC;">General</div>
+                <div id="d1TabButton" style=" width:12vw; float:left; margin-left:1vw;border-radius:0.3vw; background-color:#CCC;">D1</div>
+                <div id="d2TabButton" style=" width:12vw; float:left; margin-left:1vw;border-radius:0.3vw; background-color:#CCC;">D2</div>
+                <div id="d3TabButton" style=" width:12vw; float:left; margin-left:1vw;border-radius:0.3vw; background-color:#CCC;">D3</div>
+            </div>
+            <!--/button container-->
+
+            <!--main content container for entry status-->
+            <div id="generalTab" style=" display:block; font-size:1.3vw; text-align:left; padding:0.5vw;  height:auto; width:97%; margin-left:0.7vw; overflow:hidden; background-color:#fff;border-radius:0.7vw; float:left;">
+
+            <div style="width:45%; float:left; border-right:1px solid #ccc;">
+            <label for="st_UserID" style="font-weight:bold; margin-bottom:-1.5vw; font-size:1.5vw;">ইউজার আইডি</label>
+            <p id="st_UserID" ></p>
+
+
+            <label for="st_TotalEnD1" style="font-weight:bold;  font-size:1.5vw;">সর্বমোট ডাটা এন্ট্রি হয়েছে</label>
+                <span id="st_TotalEnD1" style="margin-bottom:-0.5vw;"></span><br>
+                <span id="st_TotalEnD2" style="margin-bottom:-0.5vw;"></span><br>
+                <span id="st_TotalEnD3"></span>
+
+            <label for="st_TodayEnD1" style="font-weight:bold; font-size:1.5vw;">শুধু আজকে ডাটা এন্ট্রি হয়েছে</label>
+            <span id="st_TodayEnD1" style="margin-bottom:-0.5vw;"></span><br>
+            <span id="st_TodayEnD2" style="margin-bottom:-0.5vw;"></span><br>
+            <span id="st_TodayEnD3"></span>
+            </div>
+
+                <div style="width:40%; float:left; padding-left:1vw; ">
+                    <label for="st_TotalEnD1" style="font-weight:bold;  font-size:1.5vw;">স্টাডির জন্য সর্বমোট উপযুক্ত শিশু</label>
+                    <span id="st_TotalEliD1" style="margin-bottom:-0.5vw;"></span><br>
+                    <span id="st_TotalEliD2" style="margin-bottom:-0.5vw;"></span><br>
+                    <span id="st_TotalEliD3"></span>
+
+
+                    <label for="st_TotalEnD1" style="font-weight:bold;  font-size:1.5vw;">আজকে স্টাডির জন্য উপযুক্ত হয়েছে</label>
+                    <span id="st_TodayEliD1" style="margin-bottom:-0.5vw;"></span><br>
+                    <span id="st_TodayEliD2" style="margin-bottom:-0.5vw;"></span><br>
+                    <span id="st_TodayEliD3"></span>
+
+                    <label for="CurrentChildID" style="font-weight:bold;  font-size:1.5vw;">এখন নিচের শিশুর আইডি এন্ট্রি হচ্ছে</label>
+                    <p id="CurrentChildID" style=" padding:1vw; border-radius:1vw; background-color:#ddfc92;"></p>
+
+
+                    <div id="cancelD4Form" style="display:none;">
+                        <input type="button" data-role="button" value="Cancel D2 form" onclick="cancelForm();" style="height:4vw; width:70%; border-radius:1vw;"/>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div id="D1Tab" style=" display:none; font-size:1.3vw; text-align:left; padding:0.5vw;  height:auto; width:97%; margin-left:0.7vw; overflow:hidden; background-color:#fff;border-radius:0.7vw; float:left;">
+            <div style="width:100%; float:left;">
+            <div style="width:6vw; float:left;">From</div><input style="float:left; width 15vw;" type="date" id="D1_Sdate" />
+            <div style="width:6vw; float:left; margin-left:1vw;">To</div><input style="float:left; width 15vw;" type="date" id="D1_Edate" />
+            <div onclick="st_getD1Data();" style="width:8vw; text-align:center; cursor:pointer; background-color:#24d5f0; border-radius:0.3vw; float:left; margin-left:1vw;">Get data</div>
+            <div id="st_getD1DataTotal" style="width:14vw; text-align:center; cursor:pointer; background-color:#f5bc42; border-radius:0.3vw; float:left; margin-left:1vw;"></div>
+            </div>
+            <div style="width:100%; margin-top:1vw; float:left; height:28vw; overflow-y:scroll; overflow-x:hidden;">
+                <table id="d1Table" style="border-collapse: collapse;" border = "1" cellpadding = "4">
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+            </div>
+
+
+            <div id="D2Tab" style=" display:none; font-size:1.3vw; text-align:left; padding:0.5vw;  height:auto; width:97%; margin-left:0.7vw; overflow:hidden; background-color:#fff;border-radius:0.7vw; float:left;">
+                <div style="width:100%; float:left;">
+                    <div style="width:6vw; float:left;">From</div><input style="float:left; width 15vw;" type="date" id="D2_Sdate" />
+                    <div style="width:6vw; float:left; margin-left:1vw;">To</div><input style="float:left; width 15vw;" type="date" id="D2_Edate" />
+                    <div onclick="st_getD2Data();" style="width:8vw; text-align:center; cursor:pointer; background-color:#24d5f0; border-radius:0.3vw; float:left; margin-left:1vw;">Get data</div>
+                    <div id="st_getD2DataTotal" style="width:14vw; text-align:center; cursor:pointer; background-color:#f5bc42; border-radius:0.3vw; float:left; margin-left:1vw;"></div>
+                </div>
+                <div style="width:100%; margin-top:1vw; float:left; height:28vw; overflow-y:scroll; overflow-x:hidden;">
+                    <table id="d2Table" style="border-collapse: collapse;" border = "1" cellpadding = "4">
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="D3Tab" style=" display:none; font-size:1.3vw; text-align:left; padding:0.5vw;  height:auto; width:97%; margin-left:0.7vw; overflow:hidden; background-color:#fff;border-radius:0.7vw; float:left;">
+                <div style="width:100%; float:left;">
+                    <div style="width:6vw; float:left;">From</div><input style="float:left; width 15vw;" type="date" id="D3_Sdate" />
+                    <div style="width:6vw; float:left; margin-left:1vw;">To</div><input style="float:left; width 15vw;" type="date" id="D3_Edate" />
+                    <div onclick="st_getD3Data();" style="width:8vw; text-align:center; cursor:pointer; background-color:#24d5f0; border-radius:0.3vw; float:left; margin-left:1vw;">Get data</div>
+                    <div id="st_getD3DataTotal" style="width:14vw; text-align:center; cursor:pointer; background-color:#f5bc42; border-radius:0.3vw; float:left; margin-left:1vw;"></div>
+                </div>
+                <div style="width:100%; margin-top:1vw; float:left; height:28vw; overflow-y:scroll; overflow-x:hidden;">
+                    <table id="d3Table" style="border-collapse: collapse;" border = "1" cellpadding = "4">
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--/main content container for entry status-->
+
+        </div>
+
+
+
+        <div style="width:100%; float:left;">
+        <div onclick="st_generalInfo();" id="statusBarSwitchOn" style="color:#fff; display:block; cursor:pointer; font-size:2vw; line-height:3vw; height:4vw; text-align:center; width:8vw; background-color:#42aaff; margin-right:6vw; float:right; border-bottom-right-radius:0.5vw; border-bottom-left-radius:0.5vw;">
+        Status
+        </div>
+            <div id="statusBarSwitchOff" style=" color:#fff; display:none; cursor:pointer; font-size:1.5vw; line-height:3vw; height:3vw; text-align:center; width:6vw; background-color:#42aaff; margin-right:6vw; float:right; border-bottom-right-radius:0.5vw; border-bottom-left-radius:0.5vw;">
+                Hide
+            </div>
+
+        </div>
+    </div>
+<!--/status bar-->
+
+
+
+
+    <div data-role="page"  id="WelcomeScreen" data-theme="d" style="background-color:#fcc603;">
+        <div data-role="main" class="ui-content">
+            <div style="height:auto; width:100%; margin-top:23vw; text-align:center; font-size:2vw;">Digital Auscultation (CC)<br>version 1.6 </div>
+        </div>
+    </div>
+
+
+
+    <div data-role="dialog"  id="DateTimeChk" data-theme="d" >
+        <!--headder-->
+        <div data-role="header">
+            <h1>  সময় এবং তারিখ</h1>
+        </div><!--/headder-->
+
+        <div data-role="main" class="ui-content">
+           <h4 style="text-align:center;"> অনুগ্রহ করে নিচে ট্যাব এর বর্তমান সময় এবং তারিখ চেক করুন। যদি তারিখ বা সময় ভুল থাকে, তাহলে অ্যাপটি বন্ধ করে সময় এবং তারিখ ঠিক করুন এবং অ্যাপটি পুনরায় চালু করুন।</h4>
+            <form name="clockForm">
+
+            <input type="text" name="clockButton" value="Loading..." class="mainClock" readonly style="	text-align:center;"/>
+            <input type="text" name="cDate" id="cDate" class="index_date" style="text-align:center;"/>
+            </form>
+
+
+
+            <a href="#login" role="button" class="ui-shadow ui-btn" data-transition="flip">
+            OK
+            </a>
+
+
+
+        </div>
+    </div>
+
+
+
+<!--login page-->
+<div data-role="page" id="login" data-theme="d" >
+<!--headder-->
+    <div data-role="header">
+<h1>Digital Auscultation-CC</h1>
+   </div><!--/headder-->
+
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+        <h1>সিস্টেম লগইন</h1>
+        <div data-role="fieldcontain">
+            <lebel data-role for="UserName">ইউজার আইডি</lebel>
+            <input type="text" id="UserName" name="UserName" data-theme="d" style="width:20vw !important;"/>
+        </div>
+
+        <div data-role="fieldcontain">
+        <lebel for="Password">পাসওয়ার্ড</lebel>
+        <input type="password" id="Password" name="Password" data-theme="d" style="width:20vw !important;"/>
+        </div>
+
+
+
+
+
+        <a href="#adminLogin" data-rel="dialog">
+            <input data-icon="gear"  type="button" data-role="button" data-inline="true" data-theme="d" id="BackUP" value="Admin Panel"/>
+        </a>
+
+
+
+
+        <input data-icon="user" type="button" data-role="button" data-inline="true" data-theme="d" id="loginID" onclick="UserChkData();" value="Login"/>
+
+    </div>    <!--/main content-->
+
+</div><!--/login page-->
+
+
+
+
+
+<!--identification_2 page-->
+<div data-role="page" id="adminLogin" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1>Identification</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="pin"> এডমিন আপনার গুপন পিন নাম্বার দিন।  </label>
+        <input type="password" id="pin" name="pin"/>
+
+
+        <input type="button" onclick="adminBack();" data-role="button" data-inline="true" data-theme="d" id="BackTo" value="Back"/>
+
+        <input type="button" onclick="adminL();" data-role="button" data-inline="true" data-theme="d" id="LogAdmin" value="Admin login"/>
+
+
+    </div>    <!--/main content-->
+</div><!--/identification_2 page-->
+
+
+
+
+
+
+
+
+
+<!--login page-->
+<div data-role="page" id="BackupPage" data-theme="d" >
+    <!--headder-->
+    <div data-role="header">
+        <h1>Admin Panel</h1>
+    </div><!--/headder-->
+
+
+
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+
+
+
+    <div id="TableData"  style="margin-left:0px; display:none;">
+
+    </div>
+
+        <DIV id="rowCount" style="display:none;">
+
+        </DIV>
+
+        <div id="D2_TableData"  style="margin-left:0px; display:none;">
+
+        </div>
+
+        <DIV id="D2_rowCount" style="display:none;">
+
+        </DIV>
+
+        <div id="D3_TableData"  style="margin-left:0px; display:none;">
+
+        </div>
+
+        <DIV id="D3_rowCount" style="display:none;">
+
+        </DIV>
+
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>ডাটা ব্যাকআপ</h3>
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; ">
+                <input type="button" data-role="button" data-inline="true" data-theme="d" id="BackUPMe" onclick="backUpMe();" value="১ ব্যাকআপ ডাটা তৈরি করুন।"/>
+                <input type="button" data-role="button" data-inline="true" data-theme="d" id="transferedSaveData"  value="২ ব্যাকআপ ডাটা প্রেরণ করুন।"/>
+            <label for="countdown" style="font-weight:bold;">Screening backup</label>
+            <label for="countdown">DA1-Screening backup status</label>
+                <input type="text" data-inline="true" data-theme="d" id="countdown" readonly style="color:#F00;"/>
+            </div>
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw; ">
+            <label for="D2_countdown" style="font-weight:bold;">DA2 form backup</label>
+            <!--
+            <input type="button" data-role="button" data-inline="true" data-theme="d" id="D2_BackUPMe" onclick="D2_backUpMe();" value="১ ব্যাকআপ ডাটা তৈরি করুন।"/>
+            <input type="button" data-role="button" data-inline="true" data-theme="d" id="D2_transferedSaveData"  value="২ ব্যাকআপ ডাটা প্রেরণ করুন।"/>
+            -->
+                 <label for="D2_countdown">DA2-Assessment backup status</label>
+                <input type="text" data-inline="true" data-theme="d" id="D2_countdown" readonly style="color:#F00;"/>
+            </div>
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+            <label for="D3_countdown" style="font-weight:bold;">DA3 form backup</label>
+            <!--
+            <input type="button" data-role="button" data-inline="true" data-theme="d" id="D3_BackUPMe" onclick="D3_backUpMe();" value="১ ব্যাকআপ ডাটা তৈরি করুন।"/>
+            <input type="button" data-role="button" data-inline="true" data-theme="d" id="D3_transferedSaveData"  value="২ ব্যাকআপ ডাটা প্রেরণ করুন।"/>
+            -->
+                <label for="D3_countdown">DA3-Sound data backup status</label>
+                <input type="text" data-inline="true" data-theme="d" id="D3_countdown" readonly style="color:#F00;"/>
+            </div>
+        </div>
+
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>মাস্টার ডাটা আপডেট</h3>
+            <input type="button" value="Update Master data" id="updateMasterData"/>
+            <label for="masterDataTotal">Total data</label>
+            <input type="text" id="masterDataTotal"/>
+            <label for="masterDataTotal_En">Total data inserted</label>
+            <input type="text" id="masterDataTotal_En"/>
+        </div>
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>ডিজিটাল স্টেথোস্কোপ ডিভাইস কোড সেটআপ </h3>
+
+            <label for="DS_Device_user">User ID</label>
+            <input type="text" id="DS_Device_user"/>
+            <label for="DS_Device_code">Device code</label>
+            <input type="text" id="DS_Device_code"/>
+
+            <input type="button" id="addDevice" value="Add" onclick="addDeviceCode();" />
+
+        </div>
+
+
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>ট্যাব সেটআপ</h3>
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                    <h4>Enter one cluster only at a time</h4>
+                    <input type="number" placeholder="ক্লাস্টার" id="PCV_cluster_new"/>
+                    <!--<input type="number" placeholder="ব্লক" id="PCV_block" readonly/>
+                    <div class="ui-bar ui-bar-a" style="height:60px; text-align:center;">Downloaded</div>
+                    <div class="ui-bar ui-bar-a" style="height:60px; text-align:center;">Uploaded</div>
+                -->
+            </div>
+
+
+
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                <h4>Master child update</h4>
+                <input type="button" role="button" value="ডাউনলোড" id="pcv_download"/>
+                <input type="button" role="button" onclick="PCV_Data_Upload();" value="তথ্য আপগ্রেড" id="pcv_upload"/>
+                <input type="text" id="totalMasterChild" style="color:#F00; font-weight:bold;"/>
+                <input type="text" style="color:#F00; font-weight:bold;" id="totalMasterChildSaved"/>
+            </div>
+
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                <h4>PCV village update</h4>
+                <input type="button" role="button" value="ডাউনলোড" id="village_download"/>
+                <input type="button" role="button" onclick="village_Data_Upload();" value="তথ্য আপগ্রেড" id="vilage_upload"/>
+                <input type="text"  id="totalVillage" style="color:#F00; font-weight:bold;"/>
+                <input type="text" id="totalVillageUploaded" style="color:#F00; font-weight:bold;"/>
+            </div>
+<!--
+            <div class="ui-grid-c">
+                <h4>PCV bari update</h4>
+                <div class="ui-block-a" style="width:22vw;"><div class="ui-bar ui-bar-a" style="height:60px;"><input type="button" role="button" value="ডাউনলোড" id="bari_download"/> </div></div>
+                    <div class="ui-block-b" style="width:22vw;"><div class="ui-bar ui-bar-a" style="height:60px;"><input type="button" role="button" onclick="Bari_Data_Upload();" value="তথ্য আপগ্রেড" id="bari_upload"/></div></div>
+                    <div class="ui-block-c" style="width:18vw;"><div class="ui-bar ui-bar-a" style="height:60px; text-align:center;" id="totalBari">Downloaded</div></div>
+                    <div class="ui-block-d" style="width:18vw;"><div class="ui-bar ui-bar-a" style="height:60px; text-align:center;" id="totalBariUploaded">Uploaded</div></div>
+            </div>
+-->
+<!--
+            <div class="ui-grid-c">
+                <h4>PCV HH update</h4>
+                <div class="ui-block-a" style="width:22vw;"><div class="ui-bar ui-bar-a" style="height:60px;"><input type="button" role="button" value="ডাউনলোড" id="hh_download"/> </div></div>
+                    <div class="ui-block-b" style="width:22vw;"><div class="ui-bar ui-bar-a" style="height:60px;"><input type="button" role="button" onclick="HH_Data_Upload();" value="তথ্য আপগ্রেড" id="hh_upload"/></div></div>
+                    <div class="ui-block-c" style="width:18vw;"><div class="ui-bar ui-bar-a" style="height:60px; text-align:center;" id="totalHH">Downloaded</div></div>
+                    <div class="ui-block-d" style="width:18vw;"><div class="ui-bar ui-bar-a" style="height:60px; text-align:center;" id="totalHHUploaded">Uploaded</div></div>
+            </div>
+-->
+
+
+
+
+        <div id="listviewPCV" style="display:none;"></div>
+        <div id="listviewPCVVillage" style="display:none;"></div>
+        <div id="listviewPCVBari" style="display:none;"></div>
+        <div id="listviewPCVHH" style="display:none;"></div>
+        <div id="CorrectedIDSync" style="display:none;"></div>
+    </div>
+
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>নতুন ইউজার</h3>
+            <input type="button" onclick="clearAllUser();"  data-role="button" value="Clear user"/>
+            <label for="newUserID"> নতুন ইউজার এর আইডি  </label>
+            <input type="number" id="newUserID" name="newUserID" />
+            <label for="newUserPassword"> নতুন ইউজার এর পাসওয়ার্ড  </label>
+            <input type="password" id="newUserPassword" name="newUserPassword" />
+            <label for="newUserName"> নতুন ইউজার এর নাম  </label>
+            <input type="text" id="newUserName" name="newUserName" />
+            <label for="newUserCCCode"> কমিউনিটি ক্লিনিকের কোড  </label>
+            <input type="number" id="newUserCCCode" name="newUserCCCode" />
+            <label for="newUserStatus"> বর্তমান অবস্তা  </label>
+            <input type="number" id="newUserStatus" name="newUserStatus" value="1" />
+            <input type="button" data-role="button" data-theme="d" id="addUser" onclick="addUser();" value="Save"/>
+
+        </div>
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>ব্যাকআপ ডাটা পুনরুদ্ধার।</h3>
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                <h4>Enter community clinic code(CC) only</h4>
+                    <input type="number" placeholder="CC কোড" id="Restore_CC"/>
+            </div>
+
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                <h4>D1-Screening data restore</h4>
+                <input type="button" role="button" value="ডাউনলোড" id="D1_Scr_download"/>
+                <input type="button" role="button" onclick="D1_Data_Upload();" value="তথ্য আপগ্রেড"/>
+                <input type="text" id="totalD1SCE" style="color:#F00; font-weight:bold;"/>
+                <input type="text" style="color:#F00; font-weight:bold;" id="totalD1SCRSaved"/>
+            </div>
+
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                <h4>D2-Assessment data restore</h4>
+                <input type="button" role="button" value="ডাউনলোড" id="D2_Assessment_download"/>
+                <input type="button" role="button" onclick="D2_Data_Upload();" value="তথ্য আপগ্রেড"/>
+                <input type="text" id="totalD2Assessment" style="color:#F00; font-weight:bold;"/>
+                <input type="text" style="color:#F00; font-weight:bold;" id="totalD2AssessmentSaved"/>
+            </div>
+
+
+            <div style="background-color: #ECECEC; border-radius:1vw; padding:1vw; margin-top:1.5vw;">
+                <h4>D3-Sound info. data restore</h4>
+                <input type="button" role="button" value="ডাউনলোড" id="D3_Sound_download"/>
+                <input type="button" role="button" onclick="D3_Data_Upload();" value="তথ্য আপগ্রেড"/>
+                <input type="text" id="totalD3Sound" style="color:#F00; font-weight:bold;"/>
+                <input type="text" style="color:#F00; font-weight:bold;" id="totalD3SoundSaved"/>
+            </div>
+
+
+        </div>
+
+
+
+
+        <div data-role="collapsible" data-content-theme="c">
+            <h3>ডাটা ডিলিট</h3>
+
+            <label for="ChildIDDelete">শিশুর আইডি। বিঃদ্রঃ আপনি শুধু সর্বশেষ এন্ট্রি/আইডি ডিলিট দিতে পারবেন এবং কোন আইডি ডিলিট করলে DA1, DA2 এবং DA3 ডিলিট হয়ে যাবে। </label>
+            <input type="number" id="ChildIDDelete" />
+            <input onclick="DeleteRec();" type="button" data-role="button" value="Delete record"/>
+        </div>
+
+
+
+
+
+
+        <div id="listviewD1" style="display:none;"></div>
+        <div id="listviewD2" style="display:none;"></div>
+        <div id="listviewD3" style="display:none;"></div>
+
+
+        <input onclick="adminLogOut();" type="button" data-role="button" data-inline="true" data-theme="d" id="backToLogin" value="Logout"/>
+
+
+
+
+
+
+    </div>    <!--/main content-->
+
+</div><!--/login page-->
+
+
+<!--.....................form selection.......................-->
+    <div data-role="page" id="FormSelection" data-theme="d">
+
+        <div data-role="header">
+            <h1> ফর্ম নির্বাচন </h1>
+        </div>
+
+
+        <div data-role="main" class="ui-content">
+
+            <div style=" padding-bottom:3vw; height:auto; overflow:hidden; width:100%; margin-top:7vw; font-size:2vw; margin-left:auto; float:left;">
+
+                <a href="#identification_1"><div style=" line-height:10vw; border-radius:2vw; height:10vw; width:18vw; background-color:#16e0ab; padding:1vw; float:left; margin-left:16vw; text-align:center;">DA1-Screening</div></a>
+                <div onclick="D2_list();"  style=" line-height:10vw; border-radius:2vw; height:10vw; width:18vw; background-color:#16e0ab; padding:1vw; float:left; margin-left:2vw; text-align:center;">DA2-Assessment</div>
+                 <div onclick="D3_list();" style=" line-height:10vw; border-radius:2vw; height:10vw; width:18vw; background-color:#16e0ab; padding:1vw; float:left; margin-left:2vw; text-align:center;">DA3-Sound info.</div>
+
+            </div>
+
+            <label for="Logout" style="font-size:1.6vw;">বিঃদ্রঃ নতুন শিশুর ক্ষত্রে DA1-Screening থেকে শুরু করুণ। শিশুটি স্টাডির জন্য প্রযোজ্য হলে, পর্যায়ক্রমে DA2 এবং DA3 ফর্ম আসবে স্বয়ংক্রিয় ভাবে।
+                   যদি কোন কারনে DA2 বা DA3 এন্ট্রি দেয়ার সময় APP বন্ধ বা ট্যাব বন্ধ হয়ে যায়, তাহলে DA2 এর জন্য DA2-Assessment বা  DA3 এর জন্য DA3-Sound Info বাটনে ক্লিক করে সঠিক শিশু নির্বাচন করে ফর্ম পূরণ করতে হবে।
+            </label>
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="Logout" onclick="userLogOut();" value="Logout"/>
+
+
+        </div>
+
+    </div>
+    <!--...................../form selection.......................-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--.....................DA2_UnenteredList.......................-->
+    <div data-role="page" id="DA2_UnenteredListContainer" data-theme="d">
+
+        <div data-role="header">
+            <h1> এন্ট্রি না হওয়া DA2-Assessment ফর্ম</h1>
+        </div>
+
+
+        <div data-role="main" class="ui-content">
+
+            <ul id="DA2_UnenteredList" data-role="listview" data-filter="true" data-filter-placeholder="শিশুর আইডি বা নাম দিয়ে খুজতে পারবেন" data-inset="true"></ul>
+           <a href="#FormSelection"> <input data-icon="back" type="button" data-role="button" data-theme="d" id="D2_back_FormSelection" value="Back"/></a>
+        </div>
+
+    </div>
+    <!--...................../DA2_UnenteredList.......................-->
+
+
+
+    <!--.....................DA3_UnenteredList.......................-->
+    <div data-role="page" id="DA3_UnenteredListContainer" data-theme="d">
+
+        <div data-role="header">
+            <h1> এন্ট্রি না হওয়া DA3-Sound Info. ফর্ম</h1>
+        </div>
+
+
+        <div data-role="main" class="ui-content">
+
+            <ul id="DA3_UnenteredList" data-role="listview" data-filter="true" data-filter-placeholder="শিশুর আইডি বা নাম দিয়ে খুজতে পারবেন" data-inset="true"></ul>
+            <a href="#FormSelection"> <input data-icon="back" type="button" data-role="button" data-theme="d" id="D3_back_FormSelection" value="Back"/></a>
+        </div>
+
+    </div>
+    <!--...................../DA3_UnenteredList.......................-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--identification_1 page-->
+<div data-role="page" id="identification_1" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী </h1>
+    </div><!--/headder-->
+
+
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+
+
+        <label for="ChildID_1"> শিশুর আইডি</label>
+
+
+        <div class="ui-grid-b">
+            <div class="ui-block-a"><input type="number" id="ChildID_1" name="ChildID_1" readonly/></div>
+            <div class="ui-block-b"><input type="number" id="ChildID_2" name="ChildID_2" readonly/></div>
+            <div class="ui-block-c"></div>
+        </div><!-- /grid-b -->
+
+        <div class="ui-grid-solo">
+            <div class="ui-block-a"><input type="button" id="setID" name="setID" onclick="setID();" value="শিশু আইডির জন্য এই বাটনে ক্লিক করুন।"/></div>
+        </div>
+
+
+
+        <input onclick="formSelectbefore();" data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="D1_Logout" value="Form selection"/>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_1" onclick="DuplicateChk();" value="Next"/>
+
+    </div>    <!--/main content-->
+</div><!--/identification_1 page-->
+
+
+
+<!--identification_2 page-->
+<div data-role="page" id="identification_2" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q101_code"> Q1.01 কমিউনিটি ক্লিনিকের কোড  </label>
+        <input type="number" id="Q101_code" name="Q101_code" readonly/>
+
+        <a data-icon="arrow-l" href="#identification_1" data-role="button" data-inline="true" data-theme="d" id="Back_2">Back</a>
+        <a data-icon="arrow-r" href="#identification_3" data-role="button" data-inline="true" data-theme="d" id="next_2">Next</a>
+
+    </div>    <!--/main content-->
+</div><!--/identification_2 page-->
+
+
+
+
+<!--identification_2 page-->
+<div data-role="page" id="identification_3" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="IsCard">মা কি কার্ড নিয়ে আসছেন?</label>
+        <select id="IsCard" onchange="IsCard();">
+            <option value="">যে কোন একটি নির্বাচন করুন</option>
+            <option value="1">হ্যাঁ, মা কার্ড নিয়ে আসছেন</option>
+            <option value="2">না, মা কার্ড নিয়ে আসেনি</option>
+        </select>
+
+        <div id="CardAvail" style="display:none; background-color:#edfffe; padding:1vw; border-radius:1vw; margin-bottom:2vw;">
+        <label for="PCV_MPID" style="font-weight:bold;"> মায়ের MPID</label>
+        <input type="number" id="PCV_MPID"/>
+        <label for="PCV_CPID" style="font-weight:bold;"> শিশুর PID</label>
+        <input type="number" id="PCV_CPID"/>
+
+            <div id="IsCardAvailToGetData" style="display:none; margin-bottom:3vw;">
+        <input type="button" data-role="button" value="শিশুর তথ্য" onclick="PCV_DATA_FOR_SCREENING();"/>
+            </div>
+
+        <label for="Q102"> Q1.02 শিশুর নাম </label>
+        <input type="text" id="Q102" name="Q102"/>
+        <label for="Q103"> Q1.03 শিশুর মায়ের নাম </label>
+        <input type="text" id="Q103" name="Q103"/>
+            <label for="Q103Father"> শিশুর বাবার নাম </label>
+            <input type="text" id="Q103Father"/>
+        </div>
+
+        <div id="CardAvail_No" style="display:none;">
+        <label for="DobNo"> শিশুর জন্ম তারিখ জানা থাকলে, বাটনটি 'হ্যাঁ' সেট করুন আর জানা না থাকলে না সেট করুন।</label>
+        <select name="DobNo" id="DobNo" onchange="dob();" data-theme="d">
+            <option value="">একটি নির্বাচন করুন।</option>
+            <option value="yes">হ্যাঁ</option>
+            <option value="no">না</option>
+        </select>
+
+        <div id="YesDOB" style="display:none;">
+        <label for="Q104"> Q1.04 শিশুর জন্ম তারিখ</label>
+        <input type="date" data-clear-btn="true" id="Q104" name="Q104" onblur="ChilDOB_M();"/>
+        </div>
+
+        <div id="NoDOB" style="display:none;">
+        <label for="Q105"> Q1.05 শিশুর বয়স কত মাস (জন্ম তারিখ জানা না থাকলে) </label>
+        <input type="number" id="Q105" name="Q105"/>
+        </div>
+
+
+
+
+        <label for="Q106"> Q1.06 শিশুটি কি ছেলে না মেয়ে?</label>
+        <select id="Q106" name="Q106" onchange="ChilDOB_M();">
+            <option value="">Select one</option>
+            <option value="1">ছেলে</option>
+            <option value="2">মেয়ে</option>
+        </select>
+        </div>
+
+
+
+        <div id="CardAvail_Yes" style="display:none;">
+            <label for="Q104_card"> Q1.04 শিশুর জন্ম তারিখ</label>
+            <input type="text" id="Q104_card" readonly/>
+            <label for="Q105_card"> Q1.05 শিশুর বয়স কত মাস (জন্ম তারিখ জানা না থাকলে) </label>
+            <input type="text" id="Q105_card" name="Q105_card" readonly/>
+            <label for="Q106_Card"> Q1.06 শিশুটি কি ছেলে না মেয়ে?</label>
+            <input type="text" id="Q106_card" readonly/>
+        </div>
+
+
+<!--        <a data-icon="arrow-l" href="#identification_1" data-role="button" data-inline="true" data-theme="d" id="Back_3">Back</a>-->
+        <input type="button" data-icon="arrow-l" data-role="button" data-inline="true" data-theme="d" id="Back_3" value="Back" onclick="backToidentification_1();" />
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_3" onclick="ChildInfo();" value="Next"/>
+
+
+
+    </div>    <!--/main content-->
+</div><!--/identification_2 page-->
+
+
+
+
+
+
+    <div data-role="dialog" id="NotEligible" data-theme="d">
+        <div data-role="header">
+            <h1>শিশুর বয়স</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <p id="Age5YearMore"></p>
+
+
+
+            <input onclick="BackToIDEN_1();" data-icon="arrow-l" type="button" data-role="button" data-inline="false" data-theme="d" value="হ্যাঁ"/>
+
+            <a href="#identification_3">
+                <input data-icon="arrow-l" type="button" data-role="button" data-inline="false" data-theme="d" value="না "/>
+            </a>
+
+        </div>
+    </div>
+
+
+
+<div data-role="dialog" id="IDEnter_MPID" data-theme="d">
+    <div data-role="header">
+        <h1>মায়ের আইডি (MPID)</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        কার্ডটি দেখে, মায়ের আইডি(MPID) লিখুন।
+
+        <input type="number" id="TransfererMPID" name="TransfererMPID"/>
+        <input type="button" data-role="button" value="NEXT" onclick="D1MPID_next();"/>
+        <input type="button" data-role="button" value="নতুন করে আবার শুরু করতে চাই।" onclick="cleanIDEn();"/>
+    </div>
+</div>
+
+
+
+<div data-role="dialog" id="IDEnter_CPID" data-theme="d">
+    <div data-role="header">
+        <h1>শিশুর আইডি (CPID)</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        কার্ডটি দেখে, শিশুর আইডি(CPID) লিখুন।
+
+        <input type="number" id="TransfererCPID" name="TransfererCPID"/>
+        <input type="button" data-role="button" value="NEXT" onclick="D1CPID_next();"/>
+        <input type="button" data-role="button" value="নতুন করে আবার শুরু করতে চাই।" onclick="cleanIDEn();"/>
+    </div>
+</div>
+
+
+<!--identification_4 page-->
+<div data-role="page" id="identification_4" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q107"> Q1.07 সিএইচসিপির কোড </label>
+        <input type="number" id="Q107" name="Q107" readonly/>
+
+        <label for="Q108Date"> Q1.08 ষ্ক্রিনিং শুরুর তারিখ</label>
+        <input type="text" id="Q108Date" name="Q108Date" readonly/>
+<!--        <input type="date" id="Q108Date" name="Q108Date"/>-->
+
+        <label for="Q108Time"> Q1.08 ষ্ক্রিনিং শুরুর সময়</label>
+        <input type="text" id="Q108Time" name="Q108Time" readonly/>
+
+
+        <a data-icon="arrow-l" href="#identification_3" data-role="button" data-inline="true" data-theme="d" id="Back_4">Back</a>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_4" onclick="CHCP();" value="Next"/>
+
+
+    </div>    <!--/main content-->
+</div><!--/identification_4 page-->
+
+
+
+
+<!--inclusion_1 page-->
+<div data-role="page" id="inclusion_1" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 2. অন্তরর্ভুক্তির বৈশিষ্ট্য</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <!--to transfer value to d2 q201-->
+        <input type="hidden" id="Q202_valueForQ201"/>
+        <input type="hidden" id="Q204_valueForQ201"/>
+        <input type="hidden" id="Q203_valueForQ405"/>
+        <!--/to transfer value to d2 q201-->
+
+        <div style="display:none;">
+        <label for="Q201"> Q2.01 শিশুটির বর্তমান বয়স কি ৫ বছরের কম?</label>
+<!--        <select id="Q201" name="Q201">
+            <option value="">Select one</option>
+            <option value="1">হাঁ</option>
+            <option value="2">না</option>
+        </select>-->
+
+        <input type="hidden" id="Q201" readonly />
+        <input type="text" id="Q201Display" readonly value=""/>
+
+        </div>
+
+        <label for="Q202"> Q2.02 শিশুটির কি কাশি আছে?</label>
+        <select id="Q202" name="Q202" onchange="Q202_ValueForD2_Q201();">
+            <option value="">Select one</option>
+            <option value="1">হ্যাঁ</option>
+            <option value="2">না</option>
+        </select>
+
+        <label for="Q203"> Q2.03 শিশুটি কি এখানে আসার পর কেশেছে?</label>
+        <select id="Q203" name="Q203" onchange="Q203_ValueForD2_Q405();">
+            <option value="">Select one</option>
+            <option value="1">হ্যাঁ</option>
+            <option value="2">না</option>
+        </select>
+
+        <label for="Q204">Q2.04 শিশুটির কি শ্বাসকষ্ট আছে?</label>
+        <select id="Q204" name="Q204" onchange="Q204_ValueForD2_Q201();">
+            <option value="">Select one</option>
+            <option value="1">হ্যাঁ</option>
+            <option value="2">না</option>
+        </select>
+
+        <label for="Q205"> Q2.05 এই ক্লিনিকে আসার পর কি শিশুটির শ্বাসকষ্ট হতে দেখেছেন?</label>
+        <select id="Q205" name="Q205">
+            <option value="">Select one</option>
+            <option value="1">হ্যাঁ</option>
+            <option value="2">না</option>
+        </select>
+
+
+
+
+        <a data-icon="arrow-l" href="#identification_3" data-role="button" data-inline="true" data-theme="d" id="Back_5">Back</a>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_5" onclick="inclusion();" value="Next"/>
+
+
+
+
+    </div>    <!--/main content-->
+</div><!--/inclusion_1 page-->
+
+
+
+
+
+
+<!--inclusion_2 page-->
+<div data-role="page" id="inclusion_2" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 2. অন্তরর্ভুক্তির বৈশিষ্ট্য</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q206"> Q2.06 শিশুটি কি ডিজিটাল অসকালটেশন গবেষণায় অন্তর্ভুক্তির শর্তাবলী পূরণ করেছে?</label>
+        <input type="hidden" id="Q206" name="Q206" readonly />
+        <input type="text" id="Q206Display" name="Q206Display" readonly value=""/>
+
+
+        <div style="float:left;">
+
+        <input type="button" data-icon="arrow-l" onclick="backtoinclusion_1();" data-role="button" data-inline="true" data-theme="d" id="Back_6" value="Back"/>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_6" onclick="inclusionQ206();" value="Next"/>
+
+        </div>
+
+        <div id="reviewForQ206" style="float:right; display:none;">
+          <input type="button" data-role="button" value="রিভিউ তে যাব" onclick="backtoReview();" />
+        </div>
+
+
+
+    </div>    <!--/main content-->
+</div><!--/inclusion_1 page-->
+
+
+
+
+
+<!--exclusion_1 page-->
+<div data-role="page" id="exclusion_1" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 2. গবেষণায় অন্তরর্ভুক্তির নাহওয়ার বৈশিষ্ট্য </h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q207"> Q2.07 শিশুটি কি অনেক বেশি অসুস্থ এবং তাকে কি এখনি রেফার করা প্রয়োজন?</label>
+        <select id="Q207" name="Q207" onchange="inclusionQ207DropDown();">
+            <option value="">Select one</option>
+            <option value="1">হ্যাঁ</option>
+            <option value="2">না</option>
+        </select>
+
+
+        <a data-icon="arrow-l" href="#inclusion_2" data-role="button" data-inline="true" data-theme="d" id="Back_7">Back</a>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_7" onclick="inclusionQ207();" value="Next"/>
+
+    </div>    <!--/main content-->
+</div><!--/exclusion_1 page-->
+
+
+
+
+
+<!--exclusion_2 page-->
+<div data-role="page" id="exclusion_2" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 2. গবেষণায় অন্তরর্ভুক্তির নাহওয়ার বৈশিষ্ট্য</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q208"> Q2.08 শিশুটি কি গত ৩০ দিনের মধ্যে ডিজিটাল অসকালটেশন গবেষণায় অন্তর্ভুক্ত হয়েছিল?</label>
+
+        <div style="display:none;" id="Q208Card_Yes">
+            <input type="hidden" id="Q208_Card" readonly>
+            <input type="text" id="Q208_Card_Display" readonly>
+        </div>
+
+        <div style="display:none;" id="Q208Card_No">
+            <input type="text" id="Q208_Display" readonly >
+            <input type="hidden" id="Q208" readonly>
+        </div>
+
+        <a data-icon="arrow-l" href="#exclusion_1" data-role="button" data-inline="true" data-theme="d" id="Back_8">Back</a>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_8" onclick="inclusionQ208();" value="Next"/>
+
+
+
+    </div>    <!--/main content-->
+</div><!--/exclusion_2 page-->
+
+
+
+
+
+
+<!--exclusion_3 page-->
+<div data-role="page" id="exclusion_3" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 2. গবেষণায় অন্তরর্ভুক্তির নাহওয়ার বৈশিষ্ট্য</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q209"> Q2.09 শিশুটি কি ডিজিটাল অসকালটেশন গবেষণায় অংশগ্রহণের জন্য উপযুক্ত?</label>
+        <input type="hidden" id="Q209" name="Q209" readonly/>
+        <input type="text" id="Q209Display" name="Q209Display" readonly/>
+
+<!--        <a href="#exclusion_2" data-role="button" data-inline="true" data-theme="d" id="Back_9">Back</a>-->
+
+        <div style="float:left;">
+        <input data-icon="arrow-l" type="button" data-role="button" data-inline="true" data-theme="d" id="Back_9" onclick="inclusionQ209Back();" value="Back"/>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_9" onclick="inclusionQ209();" value="Next"/>
+        </div>
+
+        <div id="reviewForQ209" style="float:right; display:none;">
+            <input type="button" data-role="button" value="রিভিউ তে যাব" onclick="backtoReview();" />
+        </div>
+
+
+    </div>    <!--/main content-->
+</div><!--/exclusion_2 page-->
+
+
+
+
+<!--exclusion_4 page-->
+<div data-role="page" id="exclusion_4" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1>2. গবেষণায় অন্তরর্ভুক্তির নাহওয়ার বৈশিষ্ট্য</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="Q210"> Q2.10 শিশুটির অভিভাবক কি ডিজিটাল অসকালটেশন গবেষণায় অংশগ্রহণের জন্য সম্মতি প্রদান করেছেন? যদি হ্যাঁ হয়, Screening form  সেভ করে DA2 পূরন করুন। আর যদি না হয়, গবেষণার জন্য তথ্য গ্রহন শেষ করুন তবে শিশুটিকে মূল্যায়ন করে জাতীয় গাইডলাইন অনুযায়ী চিকিৎসা প্রদান করুন</label>
+        <select id="Q210" name="Q210">
+            <option value="">Select one</option>
+            <option value="1">হ্যাঁঁ</option>
+            <option value="2">না</option>
+        </select>
+
+
+
+
+        <a data-icon="arrow-l" href="#exclusion_3" data-role="button" data-inline="true" data-theme="d" id="Back_10">Back</a>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_10" onclick="inclusionQ210();" value="Next"/>
+
+
+
+    </div>    <!--/main content-->
+</div><!--/exclusion_4 page-->
+
+
+
+
+
+
+<!--End page-->
+<div data-role="page" id="end" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1> 3. সমাপ্ত</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+<div style="display:none;">
+        <label for="Q300"> Q3.00 স্ক্রিনিং সমাপ্তির সময় </label>
+        <input type="text" id="Q300" name="Q300" readonly/>
+
+        <label for="Q301"> Q3.00 স্ক্রিনিং সমাপ্তির তারিখ </label>
+        <input type="text" id="Q301" name="Q301" readonly/>
+        <!--<input type="date" id="Q301" name="Q301"/>-->
+</div>
+
+<div style="height:auto; overflow:hidden; width:90%; border-radius:1vw; margin-left:3vw; float:left; background-color:#72f7ee; padding:1vw; font-size:1.5vw;">
+<div style="text-align:center; font-weight:bold;">ভিজিট স্ট্যাটাস</div>
+    <div>
+        <div style="width:100%; text-align:center; float:left; font-weight:bold; margin-top:1vw;" id="StatusEn"></div>
+
+        <div style="width:45%; float:left;  border-right:solid 1px #999999; margin-top:2vw;">
+<p id="statusReportQ201"></p>
+<p id="statusReportQ202"></p>
+<p id="statusReportQ203"></p>
+<p id="statusReportQ204"></p>
+        </div>
+        <div style="width:45%; float:left; padding-left:2vw;">
+<p id="statusReportQ205"></p>
+<p id="statusReportQ206"></p>
+<p id="statusReportQ207"></p>
+<p id="statusReportQ209"></p>
+<p id="statusReportQ210"></p>
+        </div>
+
+    </div>
+</div>
+
+
+        <input data-icon="arrow-l" type="button" data-role="button" data-inline="true" data-theme="d" id="Back_11" onclick="inclusionEndBack();" value="Back"/>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="next_11" onclick="inclusionQ300();" value="Next"/>
+
+
+    </div>    <!--/main content-->
+</div><!--/End page-->
+
+
+
+
+
+
+
+    <!--End page-->
+    <div data-role="dialog" id="status" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1><span style="font-size:1.4vw; font-weight:bold;" id="EligibleSignal"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <div id="statusMsg" style="padding:1vw; border-radius:0.5vw;"></div>
+            <a href="#review">
+            <input data-icon="arrow-r" type="button" data-role="button" data-theme="d" id="goToReview"  value="OK"/>
+            </a>
+        </div>    <!--/main content-->
+    </div><!--/End page-->
+
+
+
+
+
+<!--REVIEW page-->
+<div data-role="page" id="review" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1>প্রশ্ন এবং উত্তরগুল আবার দেখুন। </h1>
+    </div><!--/headder-->
+    <div data-role="header">
+        এখানে আপনার এন্ট্রি করা ডাটা পুনরায় দেখতে পারবেন। কোন ভুল থাকলে ওই প্রশ্নে বা বক্সে একবার চাপ দিয়ে প্রশ্নটি পুনরায় এন্ট্রি দিন এবং NEXT বাটনে চাপুন।
+    </div><!--/headder-->
+
+    <!--main content-->
+
+    <div data-role="main" class="ui-content">
+
+        <a href="#identification_1">
+        <div style="border:solid 1px #000;">
+        <label for="ChildID_save"> শিশুর আইডি</label>
+        <input type="number" id="ChildID_save" name="ChildID_save" readonly/>
+        </div>
+        </a>
+
+            <a href="#identification_2">
+            <div style="border:solid 1px #000;">
+        <label for="Q101_code_save"> কমিউনিটি ক্লিনিকের কোড</label>
+        <input type="number" id="Q101_code_save" name="Q101_code_save" readonly/>
+        </div>
+        </a>
+
+
+
+            <a href="#identification_3">
+        <div style="border:solid 1px #000;">
+
+            <label for="Q102_save"> শিশুর নাম</label>
+            <input type="text" id="Q102_save" name="Q102_save"/>
+            <label for="Q103_save"> শিশুর মায়ের নাম</label>
+            <input type="text" id="Q103_save" name="Q103_save"/>
+
+            <label for="Q104_save"> শিশুর জন্ম তারিখ</label>
+            <input type="text" data-clear-btn="false" id="Q104_save" name="Q104" readonly/>
+            <label for="Q105_save"> শিশুর বয়স (জন্ম তারিখ জানা না থাকলে)</label>
+            <input type="number" id="Q105_save" name="Q105"/>
+
+            <label for="Q106_save"> শিশুটি কি ছেলে না মেয়ে?</label>
+            <input type="text" id="Q106_save" name="Q106_save"/>
+
+        </div>
+        </a>
+
+
+
+
+            <a href="#identification_4">
+        <div style="border:solid 1px #000;">
+
+            <label for="Q107_save"> সিএইচসিপির কোড</label>
+            <input type="number" id="Q107_save" name="Q107_save" readonly/>
+
+            <label for="Q108Date_save"> ষ্ক্রিনিং শুরুর তারিখ</label>
+            <input type="text" id="Q108Date_save" name="Q108Date_save" readonly/>
+
+            <label for="Q108Time_save"> ষ্ক্রিনিং শুরুর সময়</label>
+            <input type="text" id="Q108Time_save" name="Q108Time_save" readonly/>
+
+
+        </div>
+        </a>
+
+
+            <a href="#inclusion_1">
+        <div style="border:solid 1px #000;">
+
+            <label for="Q201_save"> Q201 শিশুটির বর্তমান বয়স কি ৫ বছরের কম?</label>
+            <input type="text" id="Q201_save" name="Q201_save" readonly/>
+
+            <label for="Q202_save"> Q202 শিশুটির কি কাশি আছে?</label>
+            <input type="text" id="Q202_save" name="Q202_save" readonly/>
+
+            <label for="Q203_save"> Q203 শিশুটি কি এখানে আসার পর কেশেছে?</label>
+            <input type="text" id="Q203_save" name="Q203_save" readonly/>
+
+
+            <label for="Q204_save">Q204 শিশুটির কি শ্বাসকষ্ট আছে?</label>
+            <input type="text" id="Q204_save" name="Q204_save" readonly/>
+
+            <label for="Q205_save"> Q205 এই ক্লিনিকে আসার পর কি শিশুটির শ্বাসকষ্ট হতে দেখেছেন?</label>
+            <input type="text" id="Q205_save" name="Q205_save" readonly/>
+
+        </div>
+        </a>
+
+
+
+        <div style="border:solid 1px #000;" onclick="backToinclusion_2();">
+        <label for="Q206_save"> Q206 শিশুটি কি ডিজিটাল অসকালটেশন গবেষণায় অন্তর্ভুক্তির শর্তাবলী পূরণ করেছে?</label>
+        <input type="text" id="Q206_save" name="Q206_save" readonly/>
+        </div>
+
+
+
+
+        <a href="#exclusion_1">
+        <div style="border:solid 1px #000;">
+
+            <label for="Q207_save"> Q207 শিশুটি কি অনেক বেশি অসুস্থ এবং তাকে কি এখনি রেফার করা প্রয়োজন?</label>
+            <input type="text" id="Q207_save" name="Q207_save" readonly/>
+
+        </div>
+        </a>
+
+
+            <a href="#exclusion_2">
+        <div style="border:solid 1px #000;">
+            <label for="Q208_save"> Q208 শিশুটি কি গত ৩০ দিনের মধ্যে ডিজিটাল অসকালটেশন গবেষণায় অন্তর্ভুক্ত হয়েছিল?</label>
+            <input type="text" id="Q208_save" name="Q208_save" readonly/>
+        </div>
+            </a>
+
+
+        <div style="border:solid 1px #000;" onclick="backToexclusion_3();">
+
+            <label for="Q209_save"> Q209  শিশুটি কি ডিজিটাল অসকালটেশন গবেষণায় অংশগ্রহণের জন্য উপযুক্ত?</label>
+            <input type="text" id="Q209_save" name="Q209_save" readonly/>
+
+        </div>
+
+
+
+            <a href="#exclusion_4">
+        <div style="border:solid 1px #000;">
+
+            <label for="Q210_save"> Q210 শিশুটির অভিভাবক কি ডিজিটাল অসকালটেশন গবেষণায় অংশগ্রহণের জন্য সম্মতি প্রদান করেছেন?</label>
+            <input type="text" id="Q210_save" name="Q210_save" readonly/>
+
+        </div>
+            </a>
+
+<div style="display:none;">
+        <a href="#end">
+        <div style="border:solid 1px #000;">
+        <label for="Q300_save"> স্ক্রিনিং সমাপ্তির সময় </label>
+        <input type="text" id="Q300_save" name="Q300_save" readonly/>
+
+        <label for="Q301_save"> ক্রিনিং সমাপ্তির তারিখ</label>
+        <input type="text" id="Q301_save" name="Q301_save" readonly/>
+        </div>
+        </a>
+</div>
+
+        <input type="button" data-role="button" data-theme="d" id="saveData" onclick="addProduct();" value="Save"/>
+
+    </div>    <!--/main content-->
+</div><!--/REVIEW page-->
+
+
+
+
+
+
+
+
+    <div data-role="dialog" id="DA2_start" data-theme="d">
+        <div data-role="header">
+            <h1>DA2 ফর্ম</h1>
+            <div data-role="main" class="ui-content">
+                <label for="da2_show">নিচের বাটনে ক্লিক করে DA2 ফর্ম পূরণ করুণ।</label>
+                <a href="#DA2_ChildID_page">
+                    <input id="da2_show" type="button" data-role="button" value="DA2 Form">
+                </a>
+            </div>
+        </div><!--/headder-->
+    </div>
+  <!--DA2 form start from here-->
+
+
+
+
+
+
+
+
+    <!--DA2 page_1-->
+    <div data-role="page" id="DA2_ChildID_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী. Child ID - <span id="DA2_1"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="ChildID_1"> শিশুর আইডি</label>
+
+
+            <div class="ui-grid-b">
+
+                <div class="ui-block-b"><input type="text" id="DA2_ChildID" name="DA2_ChildID" readonly/></div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA2_next_1" onclick="DA_2_Next_1();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--DA2 page_1-->
+
+
+
+
+
+
+    <!--identification_1 page-->
+    <div data-role="page" id="DA2_identification_page_1" data-theme="d">
+        <!--headder-->
+
+        <div data-role="panel" data-position="left" data-position-fixed="true" data-display="push" data-theme="d" id="VillList">
+        <div style="overflow-y:scroll; height:45vw; position:fixed; width:22vw;">
+        <label for="DA2_Q103_card_list"> গ্রামের লিস্ট</label>
+        <ul id="DA2_Q103_card_list" data-role="listview" data-filter="true" data-filter-placeholder="village..." data-inset="true"></ul>
+        </div>
+        </div>
+
+        <div data-role="panel" data-position="left" data-position-fixed="true" data-display="push" data-theme="d" id="BariList">
+            <label for="DA2_Q104_card_list"> বাড়ির লিস্ট</label>
+            <ul id="DA2_Q104_card_list" data-role="listview" data-filter="true" data-filter-placeholder="Bari..." data-inset="true"></ul>
+        </div>
+
+        <div data-role="panel" data-position="left" data-position-fixed="true" data-display="push" data-theme="d" id="HHList">
+            <label for="DA2_Q105_card_list"> খানার লিস্ট</label>
+            <ul id="DA2_Q105_card_list" data-role="listview" data-filter="true" data-filter-placeholder="HH..." data-inset="true"></ul>
+        </div>
+
+        <div data-role="header">
+            <h1>DA2 - 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী. Child ID - <span id="DA2_2"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+
+            <input type="hidden" id="DA2_Cluster_code" />
+            <input type="hidden" id="DA2_Block_code" />
+
+            <label for="DA2_Q111"> Q1.11 মায়ের  পিআইডি </label>
+            <input type="number" id="DA2_Q111" name="DA2_Q111" READONLY/>
+
+            <label for="DA2_Q107"> Q1.07 শিশুর  পিআইডি</label>
+            <input type="number" id="DA2_Q107" name="DA2_Q107" READONLY/>
+
+            <div style="display:none;" id="SCR_Card">
+            <input id="getDataFromPCV" name="getDataFromPCV" type="button" data-mini="true" value="শিশুর তথ্য" onclick="PCVDATA();">
+            </div>
+
+
+            <div style="display:none;" id="DA2_Card_No">
+                <label for="DA2_Q101_card_no"> Q1.01 উপজেলার কোড</label>
+                <select id="DA2_Q101_card_no">
+                    <option value="">যে কোন একটি নির্বাচন করুণ</option>
+                    <!--<option value="01">বিয়ানীবাজার</option>-->
+                   <option value="02">কানাইঘাট</option>
+                    <option value="03">জকিগঞ্জ</option>
+                    <option value="99">জানিনা/লিস্টে নেই</option>
+                </select>
+
+                <label for="DA2_Q102_card_no"> Q1.02 ইউনিয়নের কোড  </label>
+
+                <select id="DA2_Q102_card_no" onchange="PCV_VillageGet();">
+                <option value="">একটি নির্বাচন করুণ</option>
+
+
+                <option value="30">BAROTHAKURI</option>
+                <option value="31">BAROHAL</option>
+                <option value="32">BIROSREE</option>
+                <option value="33">KAJALSHAR</option>
+                <option value="34">KASKONAKPUR</option>
+                <option value="35">KHOLACHARA</option>
+                <option value="36">MANIKPUR</option>
+                <option value="37">SULTANPUR</option>
+                <option value="38">ZAKIGANJ</option>
+
+
+
+                <option value="40">BARO CHATUL</option>
+                <option value="41">DASKHIN BANIGRAM</option>
+                <option value="42">JHINGA BARI</option>
+                <option value="43">KANAIGHAT SADAR</option>
+                <option value="44">LAXMIPRASHAD PASCHIM</option>
+                <option value="45">PASCHIM DIGHIR PARSATBAK</option>
+                <option value="46">LAXMIPRSHAD PURBO</option>
+                <option value="47">PURBA DIGHIR PAR</option>
+                <option value="48">RAZAGANZ</option>
+                <option value="99">জানিনা/লিস্টে নেই</option>
+
+
+                </select>
+
+
+                <label for="DA2_Q103_card_no"> Q1.03 গ্রামের কোড </label>
+<!--               <input type="text" id="DA2_Q103_card_no" onclick="PCV_BariGet();"/>-->
+                <input type="text" id="DA2_Q103_card_no" onkeyup="DA2_Q103_card_no();"/>
+
+                <label for="DA2_Q104_card_no"> Q1.04 বাড়ির কোড  </label>
+              <!--  <input type="number" id="DA2_Q104_card_no" readonly onclick="PCV_HHGet();"/>-->
+                <input type="number" id="DA2_Q104_card_no" readonly/>
+
+
+                <label for="DA2_Q105_card_no"> Q1.05 খানার নাম</label>
+                <input type="text" id="DA2_Q105_card_no" readonly/>
+
+            </div>
+
+
+
+
+
+            <div style="display:none;" id="DA2_Card_Yes">
+            <label for="DA2_Q101_code"> Q1.01 উপজেলার কোড</label>
+            <input type="number" id="DA2_Q101_code" name="DA2_Q101_code" readonly/>
+
+            <label for="DA2_Q102_code"> Q1.02 ইউনিয়নের কোড  </label>
+            <input type="number" id="DA2_Q102_code" name="DA2_Q102_code" readonly/>
+
+            <label for="DA2_Q103_code"> Q1.03 গ্রামের কোড </label>
+            <input type="text" id="DA2_Q103_code" name="DA2_Q103_code" readonly/>
+
+            <label for="DA2_Q104_code"> Q1.04 বাড়ির কোড  </label>
+            <input type="number" id="DA2_Q104_code" name="DA2_Q104_code" readonly/>
+
+            <label for="DA2_Q105_code"> Q1.05 খানার নাম</label>
+            <input type="text" id="DA2_Q105_code" name="DA2_Q105_code" readonly/>
+            </div>
+
+
+            <label for="DA2_Q106_code"> Q1.06 কমিউনিটি ক্লিনিকের কোড  </label>
+            <input type="number" id="DA2_Q106_code" name="DA2_Q106_code" readonly/>
+
+            <label for="DA2_Q108_code"> Q1.08 শিশুর নাম </label>
+            <input type="text" id="DA2_Q108_code" name="DA2_Q108_code" readonly/>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_2" onclick="DA_2_Back_2();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_2" onclick="D2_DuplicateChk();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/identification_1 page-->
+
+
+
+
+
+
+
+    <!--identification_2 page-->
+    <div data-role="page" id="DA2_identification_page_2" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী. Child ID - <span id="DA2_3"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q109"> Q1.09 শিশুর মায়ের নাম</label>
+            <input type="text" id="DA2_Q109" name="DA2_Q109" readonly/>
+
+            <label for="DA2_Q110"> Q1.10 মায়ের সিআইডি </label>
+            <input type="number" id="DA2_Q110" name="DA2_Q110" readonly/>
+
+            <label for="DA2_Q112"> Q1.12 শিশুর বাবার নাম </label>
+            <input type="text" id="DA2_Q112" name="DA2_Q112" readonly/>
+
+            <label for="DA2_Q113">Q1.13 ফোন নম্বর </label>
+            <input type="number" id="DA2_Q113" name="DA2_Q113"/>
+
+            <label for="DA2_Q114"> Q1.14 শিশুর জন্ম তারিখ </label>
+            <input type="text" id="DA2_Q114" name="DA2_Q114" readonly/>
+
+            <label for="DA2_Q115"> Q1.15 শিশুর বয়স </label>
+            <input type="number" id="DA2_Q115" name="DA2_Q115" readonly/>
+
+            <label for="DA2_Q116"> Q1.16 শিশুটি কি ছেলে না মেয়ে? (ছেলে - 1 ।  মেয়ে - 2)</label>
+            <input type="number" id="DA2_Q116" name="DA2_Q116" readonly/>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_3" onclick="DA_2_Back_3();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_3" onclick="DA_2_next_3();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/identification_2 page-->
+
+
+
+
+
+
+
+
+
+    <!--DA2_CHCP page-->
+    <div data-role="page" id="DA2_CHCP" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 1. সিএইচসিপির কোড এবং সাক্ষাৎকার শুরুর তারিখ, সময়। . Child ID - <span id="DA2_4"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q117"> Q1.17 সিএইচসিপির কোড</label>
+            <input type="text" id="DA2_Q117" name="DA2_Q117" readonly/>
+
+            <label for="DA2_Q118Date"> Q1.18 সাক্ষাৎকার শুরুর তারিখ</label>
+            <input type="text" id="DA2_Q118Date" name="DA2_Q118Date" readonly/>
+            <!--          <input type="date" id="DA2_Q118Date" name="DA2_Q118Date"/>-->
+
+                      <label for="DA2_Q118Time"> Q1.18 সাক্ষাৎকার শুরুর সময়</label>
+                      <input type="text" id="DA2_Q118Time" name="DA2_Q118Time" readonly/>
+
+                      <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_4" onclick="DA_2_Back_4();" value="Back"/>
+                      <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_4" onclick="DA_2_next_4();" value="Next"/>
+
+                  </div>    <!--/main content-->
+    </div>
+    <!--/DA2_CHCP page-->
+
+
+
+
+
+
+
+    <!--DA2_respondent page-->
+    <div data-role="page" id="DA2_respondent" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 1. ভিজিটের ফলাফল . Child ID - <span id="DA2_5"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q119Respondent">Q1.19 উত্তরদাতা/দাত্রী</label>
+            <select id="DA2_Q119Respondent" name="DA2_Q119Respondent">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">শিশুটির মা</option>
+                <option value="2">শিশুটির দাদী/নানী </option>
+                <option value="3">শিশুটির চাচী/ মামী/ খালা/ ফুফু</option>
+                <option value="4">শিশুটির বোন </option>
+                <option value="5">শিশুটির বাবা </option>
+                <option value="6">শিশুটির দাদা/নানা </option>
+                <option value="7">শিশুটির চাচা/মামা/খালা/ফুফা</option>
+                <option value="8">শিশুটির ভাই </option>
+                <option value="9">অন্যান্য</option>
+            </select>
+
+
+            <div id="otherQ119" style="display:none;">
+            <label for="DA2_Q119Other">অন্যান্য নির্বাচন করেছেন, তাই নিচের বক্সে সঠিক কোডটি লিখুন।</label>
+            <input type="text" id="DA2_Q119Other" name="DA2_Q119Other"/>
+            </div>
+
+
+
+            <label for="DA2_120result">Q1.20 ভিজিটের ফলাফল</label>
+            <select id="DA2_120result" name="DA2_120result">
+                <option value="1">সম্পূর্ণ</option>
+                <option value="6">সম্মতি দেয়নি</option>
+                <option value="2">অসম্পূর্ণ </option>
+                <option value="7">অন্যান্য</option>
+            </select>
+
+            <div id="otherQ120" style="display:none;">
+                <label for="DA2_Q120Other">অন্যান্য নির্বাচন করেছেন, তাই নিচের বক্সে সঠিক কোডটি লিখুন।</label>
+                <input type="text" id="DA2_Q120Other" name="DA2_Q120Other"/>
+            </div>
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_5" onclick="DA_2_Back_5();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_5" onclick="return DA_2_next_5();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_CHCP page-->
+
+
+
+
+
+
+
+
+
+    <!--DA2_Q201 page-->
+    <div data-role="page" id="DA2_Q201_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 2. শিশুর অসুস্থতার ইতিহাস। . Child ID - <span id="DA2_6"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q201_a">Q2.01 বর্তমানে শিশুটির কি কি অসুস্থতার লক্ষণ আছে? নির্দেশনাঃ অনুগ্রহ করে নিচের তালিকা থেকে অসুস্থতার লক্ষণের নাম নির্বাচন করুন ।  উল্লেখকৃত লক্ষণগুলো কতদিন ধরে দেখা যাচ্ছে তা শেষ কলামে লিখুন।</label>
+
+                   
+                <div id="DA2_Q201_aHide" style="width:100%; float:left; display:block;">
+                <div id="hideForD1Q202" style="width:40%; float:left; display:block;">
+                <select id="DA2_Q201_a" name="DA2_Q201_a" onchange="DA2_Q201a();" >
+                    <option value="">একটি নির্বাচন করুন</option>
+                    <option value="01">০১ - কাশি</option>
+                    <option value="02">০২ - জ্বর</option>
+                    <option value="03">০৩ - শ্বাস কষ্ট</option>
+                    <option value="04">০৪ - বুকের নিচের অংশ ডেবে যাওয়া</option>
+                    <option value="05">০৫ - শরীর ঠান্ডা হয়ে যাওয়া</option>
+                    <option value="06">০৬ - কান ব্যথা</option>
+                    <option value="07">০৭ - কান দিয়ে পুঁজ বা পানি পড়া</option>
+                    <option value="08">০৮ - নড়াচড়া কমে যাওয়া </option>
+                    <option value="09">০৯ - পান করতে না পারা</option>
+                    <option value="09">১০ -  মাথার তালু ফুলে যাওয়া</option>
+                    <option value="11">১১ - ঘাড় শক্ত হয়ে যাওয়া </option>
+                    <option value="12">১২ - খিঁচুনী </option>
+                    <option value="13">১৩ - অজ্ঞান হওয়া </option>
+                    <option value="14">১৪ - কিছু খেলেই বমি করা </option>
+                    <option value="15">১৫ - সর্দি</option>
+                    <option value="77">৭৭ - অন্যান্য</option>
+                </select>
+                </div>
+
+                <div id="showForD1Q202" style="width:40%; float:left; display:none;">
+                    <input type="text" id="DA2_Q201_aAuto_Display" readonly/>
+                    <input type="hidden" id="DA2_Q201_aAuto" />
+                </div>
+
+                <div style="margin-left:1vw; width:35%; float:left;">
+                <input type="number" id="DA2_Q201_a_day" name="DA2_Q201_a_day" placeholder="উদাহরণঃ 07"/>
+                </div>
+
+                <div style="margin-left:1vw; width:15%; float:left;">
+                    <div onclick="addDA2_Q201_b();" style="display:block;" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext ui-btn-b ui-btn-inline">Plus</div>
+                </div>  
+                </div>     
+
+
+
+
+            <div id="DA2_Q201_bHide" style="width:100%; float:left; display:none;">
+
+            <div id="hideForD1Q204" style="width:40%; float:left; display:block;">
+            <select id="DA2_Q201_b" name="DA2_Q201_b" onchange="DA2_Q201b();" >
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="01">০১ - কাশি</option>
+                <option value="02">০২ - জ্বর</option>
+                <option value="03">০৩ - শ্বাস কষ্ট</option>
+                <option value="04">০৪ - বুকের নিচের অংশ ডেবে যাওয়া</option>
+                <option value="05">০৫ - শরীর ঠান্ডা হয়ে যাওয়া</option>
+                <option value="06">০৬ - কান ব্যথা</option>
+                <option value="07">০৭ - কান দিয়ে পুঁজ বা পানি পড়া</option>
+                <option value="08">০৮ - নড়াচড়া কমে যাওয়া </option>
+                <option value="09">০৯ - পান করতে না পারা</option>
+                <option value="09">১০ -  মাথার তালু ফুলে যাওয়া</option>
+                <option value="11">১১ - ঘাড় শক্ত হয়ে যাওয়া </option>
+                <option value="12">১২ - খিঁচুনী </option>
+                <option value="13">১৩ - অজ্ঞান হওয়া </option>
+                <option value="14">১৪ - কিছু খেলেই বমি করা </option>
+                <option value="15">১৫ - সর্দি</option>
+                <option value="77">৭৭ - অন্যান্য</option>
+            </select>
+            </div>
+
+                <div id="showForD1Q204" style="width:40%; float:left; display:none;">
+                    <input type="text" id="DA2_Q201_bAuto_Display" readonly/>
+                    <input type="hidden" id="DA2_Q201_bAuto" />
+                </div>
+
+
+            <div style="margin-left:1vw; width:35%; float:left;">
+            <input type="number" id="DA2_Q201_b_day" name="DA2_Q201_b_day" placeholder="উদাহরণঃ 07"/>
+            </div>
+
+                <div style="margin-left:1vw; width:15%; float:left;">
+                    <div onclick="addDA2_Q201_c();" style="display:block; float:left;" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext ui-btn-b ui-btn-inline">Plus</div>
+                    <div id="minusDA2_Q201_b" onclick="minusDA2_Q201_b();" style="display:block; float:left;" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-notext ui-btn-b ui-btn-inline">Minus</div>
+                </div>
+            </div>
+
+
+
+            <div id="DA2_Q201_cHide" style="width:100%; float:left; display:none;">
+                <div style="width:40%; float:left;">
+            <select id="DA2_Q201_c" name="DA2_Q201_c" onchange="DA2_Q201c();" >
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="01">০১ - কাশি</option>
+                <option value="02">০২ - জ্বর</option>
+                <option value="03">০৩ - শ্বাস কষ্ট</option>
+                <option value="04">০৪ - বুকের নিচের অংশ ডেবে যাওয়া</option>
+                <option value="05">০৫ - শরীর ঠান্ডা হয়ে যাওয়া</option>
+                <option value="06">০৬ - কান ব্যথা</option>
+                <option value="07">০৭ - কান দিয়ে পুঁজ বা পানি পড়া</option>
+                <option value="08">০৮ - নড়াচড়া কমে যাওয়া </option>
+                <option value="09">০৯ - পান করতে না পারা</option>
+                <option value="09">১০ -  মাথার তালু ফুলে যাওয়া</option>
+                <option value="11">১১ - ঘাড় শক্ত হয়ে যাওয়া </option>
+                <option value="12">১২ - খিঁচুনী </option>
+                <option value="13">১৩ - অজ্ঞান হওয়া </option>
+                <option value="14">১৪ - কিছু খেলেই বমি করা </option>
+                <option value="15">১৫ - সর্দি</option>
+                <option value="77">৭৭ - অন্যান্য</option>
+            </select>
+            </div>
+
+            <div style="margin-left:1vw; width:35%; float:left;">
+            <input type="number" id="DA2_Q201_c_day" name="DA2_Q201_c_day" placeholder="উদাহরণঃ 07"/>
+            </div>
+                <div style="margin-left:1vw; width:15%; float:left;">
+                    <div onclick="addDA2_Q201_d();" style="display:block; float:left;" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext ui-btn-b ui-btn-inline">Plus</div>
+                    <div onclick="minusDA2_Q201_c();" style="display:block; float:left;" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-notext ui-btn-b ui-btn-inline">Minus</div>
+                </div>
+            </div>
+
+
+
+
+            <div id="DA2_Q201_dHide" style="width:100%; float:left; display:none;">
+            <div style="width:40%; float:left;">
+            <select id="DA2_Q201_d" name="DA2_Q201_d" onchange="DA2_Q201d();" >
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="01">০১ - কাশি</option>
+                <option value="02">০২ - জ্বর</option>
+                <option value="03">০৩ - শ্বাস কষ্ট</option>
+                <option value="04">০৪ - বুকের নিচের অংশ ডেবে যাওয়া</option>
+                <option value="05">০৫ - শরীর ঠান্ডা হয়ে যাওয়া</option>
+                <option value="06">০৬ - কান ব্যথা</option>
+                <option value="07">০৭ - কান দিয়ে পুঁজ বা পানি পড়া</option>
+                <option value="08">০৮ - নড়াচড়া কমে যাওয়া </option>
+                <option value="09">০৯ - পান করতে না পারা</option>
+                <option value="09">১০ -  মাথার তালু ফুলে যাওয়া</option>
+                <option value="11">১১ - ঘাড় শক্ত হয়ে যাওয়া </option>
+                <option value="12">১২ - খিঁচুনী </option>
+                <option value="13">১৩ - অজ্ঞান হওয়া </option>
+                <option value="14">১৪ - কিছু খেলেই বমি করা </option>
+                <option value="15">১৫ - সর্দি</option>
+                <option value="77">৭৭ - অন্যান্য</option>
+            </select>
+            </div>
+
+            <div style="margin-left:1vw; width:35%; float:left;">
+            <input type="number" id="DA2_Q201_d_day" name="DA2_Q201_d_day" placeholder="উদাহরণঃ 07"/>
+            </div>
+                <div style="margin-left:1vw; width:15%; float:left;">
+                    <div onclick="addDA2_Q201_e();" style="display:block; float:left;" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext ui-btn-b ui-btn-inline">Plus</div>
+                    <div onclick="minusDA2_Q201_d();" style="display:block; float:left;" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-notext ui-btn-b ui-btn-inline">Minus</div>
+                </div>
+            </div>
+
+
+
+
+            <div id="DA2_Q201_eHide" style="width:100%; float:left; display:none;">
+                <div style="width:40%; float:left;">
+            <select id="DA2_Q201_e" name="DA2_Q201_e" onchange="DA2_Q201e();" >
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="01">০১ - কাশি</option>
+                <option value="02">০২ - জ্বর</option>
+                <option value="03">০৩ - শ্বাস কষ্ট</option>
+                <option value="04">০৪ - বুকের নিচের অংশ ডেবে যাওয়া</option>
+                <option value="05">০৫ - শরীর ঠান্ডা হয়ে যাওয়া</option>
+                <option value="06">০৬ - কান ব্যথা</option>
+                <option value="07">০৭ - কান দিয়ে পুঁজ বা পানি পড়া</option>
+                <option value="08">০৮ - নড়াচড়া কমে যাওয়া </option>
+                <option value="09">০৯ - পান করতে না পারা</option>
+                <option value="09">১০ -  মাথার তালু ফুলে যাওয়া</option>
+                <option value="11">১১ - ঘাড় শক্ত হয়ে যাওয়া </option>
+                <option value="12">১২ - খিঁচুনী </option>
+                <option value="13">১৩ - অজ্ঞান হওয়া </option>
+                <option value="14">১৪ - কিছু খেলেই বমি করা </option>
+                <option value="15">১৫ - সর্দি</option>
+                <option value="77">৭৭ - অন্যান্য</option>
+            </select>
+            </div>
+                <div style="margin-left:1vw; width:35%; float:left;">
+            <input type="number" id="DA2_Q201_e_day" name="DA2_Q201_e_day" placeholder="উদাহরণঃ 07"/>
+            </div>
+                <div style="margin-left:1vw; width:15%; float:left;">
+                    <div onclick="minusDA2_Q201_e();" style="display:block;" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-notext ui-btn-b ui-btn-inline">Minus</div>
+                </div>
+            </div>
+
+
+
+
+
+<div style="width:100%; float:left;">
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_6" onclick="DA_2_Back_6();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_6" onclick="DA_2_next_6();" value="Next"/>
+
+            <div style="float:right; display:none;">
+            <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+</div>
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q201 page-->
+
+
+
+
+    <!--DA2_Q202 page-->
+    <div data-role="page" id="DA2_Q202_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 2.  শিশুর অসুস্থতার ইতিহাস। . Child ID - <span id="DA2_7"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q202">এখন অভিভাবককে জিজ্ঞাসা করুন, বর্তমানে শিশুটির নিচের লক্ষণগুলোর মধ্যে কোনওটি আছে কিনা। যদি উত্তর ‘হ্যাঁ’ হয়, তাহলে হ্যাঁ নির্বাচন করুন, ‘না’ হলে না এবং ‘জানি না’ হলে জানি না নির্বাচন করুন এবং লক্ষণগুলো কতদিন ধরে দেখা যাচ্ছে তা নিচের কলামে লিখুন। যদি মা ইতিপূর্বে “কাশি, শ্বাসকষ্ট অথবা বুকের নিচের অংশ ডেবে যাওয়া”-র কথা বলে থাকেন তবে 2.01 নং প্রশ্ন থেকে এর সময়কাল চলে আসবে।</label>
+
+
+                <label for="DA2_Q202">Q2.02 কাশি</label>
+            <div id="DA2_Q202Hide" style="display:block;">
+                <select id="DA2_Q202" name="DA2_Q202" onchange="DA2_Q202SetDay();">
+                    <option value="">একটি নির্বাচন করুন</option>
+                    <option value="1">হ্যাঁ</option>
+                    <option value="2">না</option>
+                    <option value="9">জানি না</option>
+                </select>
+            </div>
+
+            <div id="DA2_Q202showIfselected" style="display:none;">
+                <input type="hidden" id="DA2_Q202Auto" readonly />
+                <input type="text" id="DA2_Q202AutoDisplay" readonly />
+            </div>
+
+<div id="DA2_Q202_da" style="display:none;">
+            <input type="number" id="DA2_Q202_day" name="DA2_Q202_day" />
+</div>
+
+
+            <label for="DA2_Q203">Q2.03 শ্বাস নেয়ার সময় বুকের নীচের অংশ ভিতরের দিকে ডেবে যাওয়া </label>
+            <div id="DA2_Q203Hide" style="display:block;">
+                    <select id="DA2_Q203" name="DA2_Q203" onchange="DA2_Q203SetDay();" >
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">হ্যাঁ</option>
+                        <option value="2">না</option>
+                        <option value="9">জানি না</option>
+                    </select>
+            </div>
+
+            <div id="DA2_Q203showIfselected" style="display:none;">
+                <input type="hidden" id="DA2_Q203Auto" readonly />
+                <input type="text" id="DA2_Q203AutoDisplay" readonly />
+            </div>
+
+<div id="DA2_Q203_da" style="display:none;">
+                <input type="number" id="DA2_Q203_day" name="DA2_Q203_day" />
+</div>
+
+
+            <label for="DA2_Q204">Q2.04 শ্বাসকষ্ট (শ্বাস-প্রশ্বাসের যে কোনও অস্বাভাবিকতা এমনকি শ্বাস নেয়ার সময় অস্বাভাবিক শব্দ হওয়া)</label>
+            <div id="DA2_Q204Hide" style="display:block;">
+            <select id="DA2_Q204" name="DA2_Q204" onchange="DA2_Q204SetDay();" >
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">হ্যাঁ</option>
+                        <option value="2">না</option>
+                        <option value="9">জানি না</option>
+                    </select>
+            </div>
+
+            <div id="DA2_Q204showIfselected" style="display:none;">
+                <input type="hidden" id="DA2_Q204Auto" readonly />
+                <input type="text" id="DA2_Q204AutoDisplay" readonly />
+            </div>
+
+            <div id="DA2_Q204_da" style="display:none;">
+                <input type="number" id="DA2_Q204_day" name="DA2_Q204_day" />
+            </div>
+
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_7" onclick="DA_2_Back_7();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_7" onclick="DA_2_next_7();" value="Next"/>
+
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q202 page-->
+
+
+
+
+
+
+
+
+    <!--DA2_Q2051 page-->
+    <div data-role="page" id="DA2_Q205_1_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 2. ওষুধ খাওয়ার ইতিহাস. Child ID - <span id="DA2_8"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q205_1">Q2.05 গত সাত দিনের মধ্যে শিশুটিকে কি কোন ওষুধ দেয়া হয়েছিল?</label>
+            <select id="DA2_Q205_1" name="DA2_Q205_1">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+                <option value="3">৯ - জানি না</option>
+            </select>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_8" onclick="DA_2_Back_8();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_8" onclick="DA_2_next_8();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--DA2_Q2051 page-->
+
+
+
+
+    <!--DA2_Q2052 page-->
+    <div data-role="page" id="DA2_Q205_2_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 2. ওষুধ খাওয়ার ইতিহাস. Child ID - <span id="DA2_9"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q205_2">Q2.05 গত সাত দিনের মধ্যে এই অসুস্থতার জন্য শিশুটিকে কি কোন অ্যান্টিবায়োটিক দেয়া হয়েছিল?</label>
+            <select id="DA2_Q205_2" name="DA2_Q205_2">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+                <option value="3">৯ - জানি না</option>
+            </select>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_9" onclick="DA_2_Back_9();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_9" onclick="DA_2_next_9();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--DA2_Q2052 page-->
+
+
+
+
+
+
+
+    <!--DA2_Q2053 page-->
+    <div data-role="page" id="DA2_Q205_3_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 2. ওষুধ খাওয়ার ইতিহাস. Child ID - <span id="DA2_10"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q205_3_a1" style="margin-bottom:3vw;">Q2.05 যদি ’হ্যাঁ’ হয়, তবে প্রতিটি অ্যান্টিবায়োটিকের জন্য নিচের অংশটুকু পূরণ করুন।</label>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+
+                <label for="DA2_Q205_3_a1"> এন্টিবায়োটিক </label>
+                <select id="DA2_Q205_3_a1" name="DA2_Q205_3_a" onchange="DA2_Q205_3_a1();">
+                    <option value=""> a. অ্যান্টিবায়োটিক নির্বাচন করুণ </option>
+                    <option value="01">Amikacin (Injection)</option>
+                    <option value="02">Amoxicillin</option>
+                    <option value="03">Amoxicillin + Clavulanic Acid</option>
+                    <option value="04">Azithromycin</option>
+                    <option value="05">Cefaclor</option>
+                    <option value="06">Cefadroxil</option>
+                    <option value="07">Cefixime</option>
+                    <option value="08">Cefotaxime (Injection)</option>
+                    <option value="09">Cefpodoxime</option>
+                    <!--<option value="10">Cefpodoxime</option>-->
+                    <option value="11">Ceftazidime</option>
+                    <option value="12">Ceftriaxone (Injection)</option>
+                    <option value="13">Cefuroxime</option>
+                    <option value="14">Cefuroxime + Clavulanic Acid</option>
+                    <option value="15">Ciprofloxacin</option>
+                    <option value="16">Clarithromycin</option>
+                    <option value="17">Flucloxacillin</option>
+                    <option value="18">Gentamicin (Injection)</option>
+                    <option value="19">Levofloxacin</option>
+                    <option value="20">Meropenam (Injection)</option>
+                    <option value="21">Metronidazole</option>
+                    <option value="22">Moxifloxacin</option>
+                    <option value="23">Sulfamethoxazole + Trimethoprim</option>
+                    <option value="24">Ceftibuten</option>
+                    <option value="99">জানিনা</option>
+                </select>
+
+                </div>
+                <div class="ui-block-b">
+                    <label for="DA2_Q205_3_a2"> ব্যাবহারের পদ্ধতি </label>
+                    <div id="a1MediumSelection" style="display:none;">
+                    <select id="DA2_Q205_3_a2" name="DA2_Q205_3_a2">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">১ - মুখে খাওয়ার</option>
+                        <option value="2">২ - ইনজেকশন</option>
+                    </select>
+                    </div>
+
+                    <div id="a1MediumAuto" style="display:none;">
+                        <input type="text" id="DA2_Q205_3_a2AutoDisplay" readonly/>
+                        <input type="hidden" id="DA2_Q205_3_a2Auto" readonly/>
+                    </div>
+
+
+                </div>
+                <div class="ui-block-c">
+                    <label for="DA2_Q205_3_a2"> ব্যাবহারের সময়কাল(যেমনঃ ০৭)</label>
+
+                    <div id="DA2_Q205_3_a3Hide" style="display:none;">
+                    <input type="number" id="DA2_Q205_3_a3" name="DA2_Q205_3_a3" placeholder="সময়কাল"/>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="ui-block-a">
+                    <select id="DA2_Q205_3_b1" name="DA2_Q205_3_b1" onchange="DA2_Q205_3_b1();">
+                        <option value=""> b. অ্যান্টিবায়োটিক নির্বাচন করুণ </option>
+                        <option value="01">Amikacin (Injection)</option>
+                        <option value="02">Amoxicillin</option>
+                        <option value="03">Amoxicillin + Clavulanic Acid</option>
+                        <option value="04">Azithromycin</option>
+                        <option value="05">Cefaclor</option>
+                        <option value="06">Cefadroxil</option>
+                        <option value="07">Cefixime</option>
+                        <option value="08">Cefotaxime (Injection)</option>
+                        <option value="09">Cefpodoxime</option>
+                        <!--<option value="10">Cefpodoxime</option>-->
+                        <option value="11">Ceftazidime</option>
+                        <option value="12">Ceftriaxone (Injection)</option>
+                        <option value="13">Cefuroxime</option>
+                        <option value="14">Cefuroxime + Clavulanic Acid</option>
+                        <option value="15">Ciprofloxacin</option>
+                        <option value="16">Clarithromycin</option>
+                        <option value="17">Flucloxacillin</option>
+                        <option value="18">Gentamicin (Injection)</option>
+                        <option value="19">Levofloxacin</option>
+                        <option value="20">Meropenam (Injection)</option>
+                        <option value="21">Metronidazole</option>
+                        <option value="22">Moxifloxacin</option>
+                        <option value="23">Sulfamethoxazole + Trimethoprim</option>
+                        <option value="24">Ceftibuten</option>
+                        <option value="99">জানিনা</option>
+                    </select>
+                </div>
+                <div class="ui-block-b">
+
+                    <div id="b1MediumSelection" style="display:none;">
+                    <select id="DA2_Q205_3_b2" name="DA2_Q205_3_b2">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">১ - মুখে খাওয়ার</option>
+                        <option value="2">২ - ইনজেকশন</option>
+                    </select>
+                    </div>
+
+
+                    <div id="b1MediumAuto" style="display:none;">
+                        <input type="text" id="DA2_Q205_3_b2AutoDisplay" readonly/>
+                        <input type="hidden" id="DA2_Q205_3_b2Auto" readonly/>
+                    </div>
+
+                </div>
+                <div class="ui-block-c">
+
+                    <div id="DA2_Q205_3_b3Hide" style="display:none;">
+                    <input type="number" id="DA2_Q205_3_b3" name="DA2_Q205_3_b3" placeholder="সময়কাল"/>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="ui-block-a">
+                    <select id="DA2_Q205_3_c1" name="DA2_Q205_3_c1" onchange="DA2_Q205_3_c1();">
+                        <option value="">  c. অ্যান্টিবায়োটিক নির্বাচন করুণ </option>
+                        <option value="01">Amikacin (Injection)</option>
+                        <option value="02">Amoxicillin</option>
+                        <option value="03">Amoxicillin + Clavulanic Acid</option>
+                        <option value="04">Azithromycin</option>
+                        <option value="05">Cefaclor</option>
+                        <option value="06">Cefadroxil</option>
+                        <option value="07">Cefixime</option>
+                        <option value="08">Cefotaxime (Injection)</option>
+                        <option value="09">Cefpodoxime</option>
+                        <!--<option value="10">Cefpodoxime</option>-->
+                        <option value="11">Ceftazidime</option>
+                        <option value="12">Ceftriaxone (Injection)</option>
+                        <option value="13">Cefuroxime</option>
+                        <option value="14">Cefuroxime + Clavulanic Acid</option>
+                        <option value="15">Ciprofloxacin</option>
+                        <option value="16">Clarithromycin</option>
+                        <option value="17">Flucloxacillin</option>
+                        <option value="18">Gentamicin (Injection)</option>
+                        <option value="19">Levofloxacin</option>
+                        <option value="20">Meropenam (Injection)</option>
+                        <option value="21">Metronidazole</option>
+                        <option value="22">Moxifloxacin</option>
+                        <option value="23">Sulfamethoxazole + Trimethoprim</option>
+                        <option value="24">Ceftibuten</option>
+                        <option value="99">জানিনা</option>
+                    </select>
+
+                </div>
+
+                <div class="ui-block-b">
+
+                    <div id="c1MediumSelection" style="display:none;">
+                        <select id="DA2_Q205_3_c2" name="DA2_Q205_3_c2">
+                            <option value="">একটি নির্বাচন করুন</option>
+                            <option value="1">১ - মুখে খাওয়ার</option>
+                            <option value="2">২ - ইনজেকশন</option>
+                        </select>
+                    </div>
+
+
+                    <div id="c1MediumAuto" style="display:none;">
+                        <input type="text" id="DA2_Q205_3_c2AutoDisplay" readonly/>
+                        <input type="hidden" id="DA2_Q205_3_c2Auto" readonly/>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class="ui-block-c">
+
+                    <div id="DA2_Q205_3_c3Hide" style="display:none;">
+                    <input type="number" id="DA2_Q205_3_c3" name="DA2_Q205_3_c3" placeholder="সময়কাল"/>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_10" onclick="DA_2_Back_10();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_10" onclick="DA_2_next_10();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--DA2_Q2052 page-->
+
+
+
+
+
+
+
+
+    <!--DA2_Q301_2 page-->
+    <div data-role="page" id="DA2_Q301_2_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 3. শিশুর শারীরিক পরীক্ষা. Child ID - <span id="DA2_11"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q301">Q3.01 আপনি কি শিশুটির শারীরিক পরীক্ষা করেছেন?</label>
+            <select id="DA2_Q301" name="DA2_Q301" onchange="DA2_Q301();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+
+            <div id="DA2_Q301IsNo" style="display:none;">
+            <label for="DA2_Q302">Q3.02 যদি না করে থাকেন, তবে কারণ কি?</label>
+            <select id="DA2_Q302" name="DA2_Q302">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - শিশুটি এতই অসুস্থ ছিল যে পরীক্ষা করা যায়নি</option>
+                <option value="2">২ - সহযোগিতা করেনি</option>
+                <option value="3">৩ - সম্মতি দেয়নি</option>
+                <option value="7">৭ - অন্য কোন কারণ</option>
+            </select>
+
+
+                <div id="DA2_Q302Is7" style="display:none;">
+                <label for="DA2_Q302_other">অন্য কোন কারন নির্বাচন করেছেন, তাই অন্য কারনের কোড লিখুন।</label>
+                <input type="number" id="DA2_Q302_other" name="DA2_Q302_other" />
+                </div>
+
+            </div>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_11" onclick="DA_2_Back_11();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_11" onclick="return DA_2_next_11();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q301_2 page-->
+
+
+
+
+
+
+
+
+    <!--DA2_Q401 page-->
+    <div data-role="page" id="DA2_Q401_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 4. দ্রুত শ্বাস, বুকের নীচের অংশ ডেবে যাওয়া এবং দৃশ্যমান কাশি. Child ID - <span id="DA2_12"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q401">Q4.01 শিশুটির বয়সের শ্রেণি</label>
+            <input type="hidden" id="DA2_Q401" name="DA2_Q401" readonly/>
+            <input type="text" id="DA2_Q401Diaplay" name="DA2_Q401Diaplay" readonly/>
+            <input type="button" onclick="childAgeGroup();" data-role="button" id="getAgeGroup" name="getAgeGroup" value="বয়স নিধারন এর জন্য এই বাটনে চাপুন।">
+
+            <label for="DA_2_Back_12">
+                ২ মাসের কম
+                (0-<2 month)...Group 1<br>
+                ২ মাস থেকে ১২ মাসের পূর্ব পর্যন্ত
+                (2-<12 month )...Group 2<br>
+                ১২ মাস বা তার বেশি
+                (≥12 month )...Group 3
+
+            </label>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_12" onclick="DA_2_Back_12();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_12" onclick="DA_2_next_12();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q401 page-->
+
+
+
+
+    <!--DA2_Q402 page-->
+    <div data-role="page" id="DA2_Q402_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 4. দ্রুত শ্বাস, বুকের নীচের অংশ ডেবে যাওয়া এবং দৃশ্যমান কাশি. Child ID - <span id="DA2_13"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <div id="BR_1en_1" style="display:block;">
+            <label for="DA2_Q402_a">Q4.02_a ১ মিনিট ধরে শিশুটির শ্বাস-প্রশ্বাসের হার গননা করুন এবং পাশের বক্সে লিখুন।<BR><BR>বিঃদ্রঃ শিশুর শ্বাস প্রশ্বাস এর হার গণনা এন্ট্রির জন্য, দুইবার করে এন্ট্রি দিতে হবে। প্রথম এন্ট্রি এবং দ্বিতীয় এন্ট্রির সাথে অবশ্যই মিল থাকতে হবে। নয়তো, পুনরায় প্রথম এন্ট্রি থেকে শুরু করতে হবে। দ্রুত শ্বাস এর লক্ষণ থাকলে, আবার দুইবার করে এন্ট্রি দিতে হবে।</label>
+            </div>
+           <!-- <div id="BR_1en" style="display:block; margin-top:2vw;">
+            <INPUT type="button" value="প্রথম এন্ট্রির জন্য এই বাটনে চাপুন" onclick="Q4021stEntry();"/>
+            </div>-->
+            <div id="1stEn" style="display:block;">
+            <label for="DA2_Q402_a" style="font-weight:bold;">প্রথম এন্ট্রি</label>
+                <input type="number" id="DA2_Q402_a" name="DA2_Q402_a"/>
+            <INPUT type="button" value="উপরে পরিমাপ লিখে, দ্বিতীয় এন্ট্রির জন্য এই বাটনে চাপুন" onclick="Q4022ndEntry();"/>
+            </div>
+
+            <div id="2ndEn" style="display:none;">
+                <label for="DA2_Q402_a2_en" style="font-weight:bold;">দ্বিতীয় এন্ট্রি</label>
+            <input type="number" id="DA2_Q402_a2_en" name="DA2_Q402_a2_en"/>
+            <input type="button" onclick="fastBreathing();" data-role="button" id="fastBreathing" name="fastBreathing" value="উপরে দ্বিতীয় এন্ট্রি দিয়ে, দ্রুত শ্বাস নিধারনের  জন্য এই বাটনে চাপুন।">
+            </div>
+
+            <div style="display:none; background-color:#ffcfcf; padding:1vw; border-radius:1vw;" id="firstBRSecChk">
+            <label for="DA2_Q402_b">Q4.02_b শিশুটির শ্বাসের হার তার বয়সের গ্রুপ অনুযায়ী স্বাভাবিক শ্বাসের হারের চেয়ে বেশী,আবার গননা করুন। <BR><BR>বিঃদ্রঃ দ্বিতীয়বার শিশুর শ্বাস প্রশ্বাস এর হার গণনা এন্ট্রির জন্য, দুইবার করে এন্ট্রি দিতে হবে। প্রথম এন্ট্রি এবং দ্বিতীয় এন্ট্রির সাথে অবশ্যই মিল থাকতে হবে। নয়তো, পুনরায় প্রথম এন্ট্রি থেকে শুরু করতে হবে। দ্রুত শ্বাস এর লক্ষণ থাকলে, আবার দুইবার করে এন্ট্রি দিতে হবে।<br><br></label>
+            <div id="2ndTimeBR" style="display:block;">
+            <label style="font-weight:bold;">প্রথম এন্ট্রি</label>
+                <input type="number" id="DA2_Q402_b1st"/>
+                <INPUT type="button" value="দ্বিতীয় পরিমাপ উপরে লিখে, দ্বিতীয় এন্ট্রির জন্য এই বাটনে চাপুন" onclick="DA2_Q402_b1st();"/>
+            </div>
+            </div>
+
+            <div style="display:none; background-color:#ffcfcf; padding:1vw; overflow:hidden; border-radius:1vw;" id="DA2_Q402_b2ndEn">
+                <label for="DA2_Q402_b" style="font-weight:bold;">দ্বিতীয় এন্ট্রি</label>
+                <input type="number" id="DA2_Q402_b" name="DA2_Q402_b" onkeyup="ConfirmFirstBreath();"/>
+                <input type="button" value="উপরে দ্বিতীয় এন্ট্রি দিয়ে, এই বাটনে চাপুন।" onclick="DA2_Q402_b2Nden2();"/>
+            </div>
+
+
+            <label for="DA2_Q402_c">Q4.02_c দ্রুত শ্বাসের লক্ষণ।</label>
+            <input type="hidden" id="DA2_Q402_c" name="DA2_Q402_c"/>
+            <input type="text" id="DA2_Q402_c_Display" name="DA2_Q402_c_Display" readonly/>
+
+<label for="DA_2_Back_13">
+
+</label>
+
+            <div>
+                <div style="width:15vw; float:left;">
+                <input data-icon="back" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_Back_13" onclick="DA_2_Back_13();" value="Back"/>
+                </div>
+               <div id="Q402ButtonNext" style="display:none; width:15vw; float:left;">
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_next_13" onclick="return DA_2_next_13();" value="Next"/>
+               </div>
+            </div>
+
+            <div style="float:right;">
+                <input onclick="cancelAllBR();" type="button" data-role="button" data-inline="true" data-theme="d" value="সম্পূর্ণ নতুন করে এন্ট্রি দিতে চাই" style="color:#999; background-color:#F00;"/>
+                <div style="display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+                </div>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q402 page-->
+
+
+
+
+    <!--DA2_Q403 page-->
+    <div data-role="page" id="DA2_Q403_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 4. দ্রুত শ্বাস, বুকের নীচের অংশ ডেবে যাওয়া এবং দৃশ্যমান কাশি. Child ID - <span id="DA2_14"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q403">Q4.03 শিশুটি কি জেগে ছিল নাকি ঘুমিয়ে ছিল? জেগে থাকলে শান্ত ছিল নাকি উত্তেজিত ছিল?</label>
+            <select id="DA2_Q403" name="DA2_Q403">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - জেগে ছিল এবং শান্ত ছিল</option>
+                <option value="2">২ - জেগে ছিল এবং উত্তেজিত ছিল</option>
+                <option value="3">৩ - ঘুমিয়ে ছিল</option>
+            </select>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_14" onclick="DA_2_Back_14();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_14" onclick="DA_2_next_14();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q402 page-->
+
+
+
+    <!--DA2_Q404 page-->
+    <div data-role="page" id="DA2_Q404_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 4. দ্রুত শ্বাস, বুকের নীচের অংশ ডেবে যাওয়া এবং দৃশ্যমান কাশি. Child ID - <span id="DA2_15"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q404">Q4.04 শ্বাস নেয়ার সময় বুকের নীচের অংশ ভিতরের দিকে ডেবে যাওয়া</label>
+            <select id="DA2_Q404" name="DA2_Q404">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+            <label for="DA2_Q405">Q4.05 শিশুটি কি আপনার সামনে কেশেছিল?</label>
+
+            <input readonly type="hidden" id="DA2_Q405"/>
+            <input readonly type="text" id="DA2_Q405Display"/>
+<!--
+            <select id="DA2_Q405" name="DA2_Q405">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+-->
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_15" onclick="DA_2_Back_15();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_15" onclick="DA_2_next_15();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+
+
+
+
+    <!--DA2_Q501 page-->
+    <div data-role="page" id="DA2_Q501_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 5. শ্বাস-প্রশ্বাস সম্পর্কিত বিপদচিহ্ন. Child ID - <span id="DA2_16"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <label for="DA2_Q501">যদি যে কোন একটি হ্যাঁ হয়, তবে উপজেলা স্বাস্থ্য কমপ্লেক্স বা সিলেট ওসমানী মেডিকেল কলেজ হাসপাতালে রেফার করুন। </label>
+            <label for="DA2_Q501">Q5.01 স্ট্রাইডর (শ্বাস নেয়ার সময় জোরে শব্দ)</label>
+            <select id="DA2_Q501" name="DA2_Q501">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+            <label for="DA2_Q502">Q5.02 গ্রানটিং (শ্বাস ছাড়ার শেষ দিকে ’আহ’ জাতীয় শব্দ</label>
+            <select id="DA2_Q502" name="DA2_Q502">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+            <label for="DA2_Q503">Q5.03 হেড নোডিং (শ্বাস-প্রশ্বাসের সাথে সাথে মাথা উপর নিচে উঠানামা করে)</label>
+            <select id="DA2_Q503" name="DA2_Q503">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+
+            <label for="DA2_Q504">Q5.04 ট্রাকিয়াল টাগিং (শ্বাস নেয়ার সময় গলার মাংসপেশী ভিতরের দিকে ডেবে যাওয়া)</label>
+            <select id="DA2_Q504" name="DA2_Q504">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+            <label for="DA2_Q505">Q5.05 ন্যাজাল ফ্ল্যারিং (শ্বাস নেয়ার সময় প্রতিবার নাকের পাতা বাইরের দিকে ফুলে ওঠা যা সহজেই বোঝা যায়)</label>
+            <select id="DA2_Q505" name="DA2_Q505">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+            <label for="DA2_Q506">Q5.06 ইন্টারকোস্টাল রিট্রাকসন (শ্বাস নেয়ার সময় বুকের পাজরের মধ্যবর্তী মাংশপেশী ভিতরের দিকে ডেবে যাওয়া)</label>
+            <select id="DA2_Q506" name="DA2_Q506">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_16" onclick="DA_2_Back_16();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_16" onclick="DA_2_next_16();" value="Next"/>
+
+            <div id="DA2_BackToReviewForQ501" style="float:right; display:none;">
+            <input type="button" onclick="DA2_backToreview();" value="রিভিউ তে যাব" />
+            </div>
+
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+
+
+
+    <div data-role="page" id="DA2_Q601_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 6. শরীরের তাপমাত্রা এবং ওজন.</h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <input type="hidden" id="childMeasureVarification"/>
+
+
+            <label for="DA2_Q601">Q6.01 তাপমাত্রা (ডান বগলে) (°F)(০০০,০)</label>
+            <input type="number" id="DA2_Q601" name="DA2_Q601" onkeyup="DA2_Q601();" data-clear-btn="true"/>
+
+            <div style="display:block;" id="DA2_Q6011En">
+                <input onclick="DA2_Q601Double1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+            </div>
+
+            <div style="display:none;" id="DA2_Q6012En">
+                <input onclick="DA2_Q601Double2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+            </div>
+
+
+            <div id="DA2_Q602Hide" style="display:none;">
+            <label for="DA2_Q602">Q6.02 তাপমাত্রা (বাম বগলে) (°F)(০০০,০)</label>
+            <input type="number" id="DA2_Q602" name="DA2_Q602" onkeyup="DA2_Q602();" data-clear-btn="true"/>
+
+            <div style="display:block;" id="DA2_Q6021En">
+                <input onclick="DA2_Q602Double1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+            </div>
+
+            <div style="display:none;" id="DA2_Q6022En">
+                <input onclick="DA2_Q602Double2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+            </div>
+            </div>
+
+
+
+
+
+
+            <div id="DA2_Q601_2ResultHide" style="display:none;">
+            <label for="DA2_Q601_2Result">তাপমাত্রা [Temperature] ≥99.50F</label>
+            <input type="hidden" id="DA2_Q601_2Result" data-clear-btn="true" readonly/>
+            <input type="text" id="DA2_Q601_2ResultDisplay" data-clear-btn="true" readonly/>
+            </div>
+
+            <div>
+                <div style="width:15vw; float:left;">
+            <input data-icon="back" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_Back_17" onclick="DA_2_Back_17();" value="Back"/>
+                </div>
+                <div id="DA_2_next_17Hide" style="width:15vw; float:left; display:none;">
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_next_17" onclick="DA_2_next_17();" value="Next"/>
+                </div>
+            </div>
+
+            <div style="float:right;">
+                <input onclick="cancelQ601();" type="button" data-role="button" data-inline="true" data-theme="d" value="সম্পূর্ণ নতুন করে এন্ট্রি দিতে চাই" style="color:#999; background-color:#F00;"/>
+                <div style="display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style=" color:#999; background-color:#F00;"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA2_Q601_1_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 6. শরীরের তাপমাত্রা এবং ওজন.</h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <label for="ChildSeightDone">আপনি কি শিশুর সঠিক ওজন নিতে পেরেছেন? হ্যাঁ বা না নির্বাচন করুন।</label>
+            <select id="ChildSeightDone" onchange="ChildSeightDone();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">হ্যাঁ শিশুর ওজন নেয়া হয়েছে</option>
+                <option value="2">না শিশুর ওজন নেয়া হয়নি</option>
+            </select>
+
+
+            <div style="display:none;" id="childWeightDiv">
+                <label for="DA2_Q603a">Q6.03a শিশুর ওজন (KG)(০০,০)</label>
+                <input type="number" id="DA2_Q603a" name="DA2_Q603a" onkeyup="DA2_Q603a();" data-clear-btn="true"/>
+
+                <div style="display:block;" id="DA2_Q603a1En">
+                    <input onclick="DA2_Q603aDouble1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+                </div>
+
+                <div style="display:none;" id="DA2_Q603a2En">
+                    <input onclick="DA2_Q603aDouble2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <div style="display:none;" id="child_MotherWeightDiv">
+                <label for="DA2_Q603b">Q6.03b শিশুসহ শিশুর অভিভাবকের ওজন (KG)(০০০,০)</label>
+                <input type="number" id="DA2_Q603b" name="DA2_Q603b" onkeyup="DA2_Q603b();" data-clear-btn="true"/>
+
+                <div style="display:block;" id="DA2_Q603b1En">
+                    <input onclick="DA2_Q603bDouble1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+                </div>
+
+                <div style="display:none;" id="DA2_Q603b2En">
+                    <input onclick="DA2_Q603bDouble2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+                </div>
+
+
+
+<div id="DA2_Q603cHide" style="display:none;">
+                <label for="DA2_Q603c">Q6.03c শিশুর অভিভাবকের ওজন (KG)(০০০,০)</label>
+                <input type="number" id="DA2_Q603c" name="DA2_Q603c" onkeyup="DA2_Q603c();" data-clear-btn="true"/>
+
+                <div style="display:block;" id="DA2_Q603c1En">
+                    <input onclick="DA2_Q603cDouble1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+                </div>
+
+                <div style="display:none;" id="DA2_Q603c2En">
+                    <input onclick="DA2_Q603cDouble2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+                </div>
+</div>
+
+
+            </div>
+
+
+            <div>
+            <div style="float:left; width:15vw;">
+                <input data-icon="back" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_Back_601_1" onclick="DA_2_Back_601();" value="Back"/>
+            </div>
+                <div id="DA_2_next_601_1Hide" style="display:none; float:left; width:15vw;">
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_next_601_1" onclick="DA2_Q601_2_page();" value="Next"/>
+                </div>
+            </div>
+
+            <div style="float:right;">
+                <input onclick="cancelQ603();" type="button" data-role="button" data-inline="true" data-theme="d" value="সম্পূর্ণ নতুন করে এন্ট্রি দিতে চাই" style="color:#999; background-color:#F00;"/>
+                <div style="display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+                </div>
+                </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA2_Q601_2_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 6. শরীরের তাপমাত্রা এবং ওজন.</h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <label for="DA2_Q604mm">Q6.04 শিশুর উর্ধ্ব বাহুর মধ্যভাগের পরিধি (MM)(000)</label>
+            <input type="number" id="DA2_Q604mm" name="DA2_Q604mm" onblur="DA2_Q604();" data-clear-btn="true"/>
+
+            <label for="DA2_Q604"> In(CM)(০০,০)</label>
+            <input type="text" id="DA2_Q604" name="DA2_Q604" readonly/>
+            <div style="display:block;" id="DA2_Q6041En">
+                <input onclick="DA2_Q604Double1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+            </div>
+
+            <div style="display:none;" id="DA2_Q6042En">
+                <input onclick="DA2_Q604Double2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+            </div>
+
+
+
+
+
+            <div>
+                <div style="width:15vw; float:left;">
+            <input data-icon="back" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_Back_601_2" onclick="DA_2_Back_601_1();" value="Back"/>
+                </div>
+                <div id="DA_2_next_601_2Hide" style="display:none; float:left; width:15vw;">
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_next_601_2" onclick="DA2_Q601_3_page();" value="Next"/>
+                </div>
+            </div>
+
+
+            <div style="float:right;">
+                <input onclick="cancelQ604();" type="button" data-role="button" data-inline="true" data-theme="d" value="সম্পূর্ণ নতুন করে এন্ট্রি দিতে চাই" style="color:#999; background-color:#F00;"/>
+                <div style="display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div data-role="page" id="DA2_Q601_3_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 6. শরীরের তাপমাত্রা এবং ওজন.</h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <label for="DA2_Q605">Q6.05 শিশুর দৈর্ঘ্য/ উচ্চতা (CM)(০০০,০)</label>
+            <input type="number" id="DA2_Q605" name="DA2_Q605" onkeyup="DA2_Q605();" data-clear-btn="true"/>
+
+
+            <div style="display:block;" id="DA2_Q6051En">
+                <input onclick="DA2_Q605Double1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব"/>
+            </div>
+
+            <div style="display:none;" id="DA2_Q6052En">
+                <input onclick="DA2_Q605Double2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে"/>
+            </div>
+
+
+            <div>
+                <div style="width:15vw; float:left;">
+            <input data-icon="back" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_Back_601_3" onclick="DA_2_Back_601_2();" value="Back"/>
+                </div>
+                <div id="DA_2_next_601_3Hide" style="display:none; float:left; width:15vw;">
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_2_next_601_3" onclick="DA2_Q701_page();" value="Next"/>
+                </div>
+            </div>
+
+            <div style="float:right;">
+                <input onclick="cancelQ605();" type="button" data-role="button" data-inline="true" data-theme="d" value="সম্পূর্ণ নতুন করে এন্ট্রি দিতে চাই" style="color:#999; background-color:#F00;"/>
+                <div style="display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!--DA2_Q501 page-->
+    <div data-role="page" id="DA2_Q601_page_old" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 6. শরীরের তাপমাত্রা এবং ওজন. Child ID - <span id="DA2_17"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+<!--
+            <label for="DA2_Q601">Q6.01 তাপমাত্রা (ডান বগলে) (°F)(০০০,০)</label>
+            <input type="number" id="DA2_Q601" name="DA2_Q601" onkeyup="DA2_Q601();" data-clear-btn="true"/>
+
+            <label for="DA2_Q602">Q6.02 তাপমাত্রা (বাম বগলে) (°F)(০০০,০)</label>
+            <input type="number" id="DA2_Q602" name="DA2_Q602" onkeyup="DA2_Q602();" data-clear-btn="true"/>
+
+            <label for="DA2_Q601_2Result">তাপমাত্রা [Temperature] ≥99.50F</label>
+            <input type="hidden" id="DA2_Q601_2Result" data-clear-btn="true" readonly/>
+            <input type="text" id="DA2_Q601_2ResultDisplay" data-clear-btn="true" readonly/>
+-->
+
+
+      <!--
+            <label for="ChildSeightDone">আপনি কি শিশুর সঠিক ওজন নিতে পেরেছেন? হ্যাঁ বা না নির্বাচন করুন।</label>
+            <select id="ChildSeightDone" onchange="ChildSeightDone();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">হ্যাঁ শিশুর ওজন নেয়া হয়েছে</option>
+                <option value="2">না শিশুর ওজন নেয়া হয়নি</option>
+            </select>
+
+
+
+
+            <div style="display:none;" id="childWeightDiv">
+            <label for="DA2_Q603a">Q6.03a শিশুর ওজন (KG)(০০,০)</label>
+            <input type="number" id="DA2_Q603a" name="DA2_Q603a" onkeyup="DA2_Q603a();" data-clear-btn="true"/>
+            </div>
+
+            <div style="display:none;" id="child_MotherWeightDiv">
+            <label for="DA2_Q603b">Q6.03b শিশুসহ শিশুর অভিভাবকের ওজন (KG)(০০০,০)</label>
+            <input type="number" id="DA2_Q603b" name="DA2_Q603b" onkeyup="DA2_Q603b();" data-clear-btn="true"/>
+
+            <label for="DA2_Q603c">Q6.03c শিশুর অভিভাবকের ওজন (KG)(০০০,০)</label>
+            <input type="number" id="DA2_Q603c" name="DA2_Q603c" onkeyup="DA2_Q603c();" data-clear-btn="true"/>
+            </div>
+-->
+
+<!--
+            <label for="DA2_Q604mm">Q6.04 শিশুর উর্ধ্ব বাহুর মধ্যভাগের পরিধি (MM)(000)</label>
+            <input type="number" id="DA2_Q604mm" name="DA2_Q604mm" onblur="DA2_Q604();" data-clear-btn="true"/>
+            <label for="DA2_Q604"> In(CM)(০০,০)</label>
+            <input type="text" id="DA2_Q604" name="DA2_Q604" readonly/>
+-->
+       <!--
+            <label for="DA2_Q605">Q6.05 শিশুর দৈর্ঘ্য/ উচ্চতা (CM)(০০০,০)</label>
+            <input type="number" id="DA2_Q605" name="DA2_Q605" onkeyup="DA2_Q605();" data-clear-btn="true"/>
+-->
+<!--
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_17" onclick="DA_2_Back_17();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_17" onclick="DA_2_next_17();" value="Next"/>
+
+
+            <div style="float:right;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+-->
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+
+
+
+    <!--DA2_Q501 page-->
+    <div data-role="page" id="DA2_Q701_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 7. সিএইচসিপি যে চিকিৎসা দিয়েছিল. Child ID - <span id="DA2_18"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+            <label for="DA2_Q701">Q7.01 আপনি কি শিশুটিকে রেফার করেছিলেন নাকি বাড়িতে চিকিৎসা দিয়েছিলেন?</label>
+            <select id="DA2_Q701" name="DA2_Q701" onchange="DA2_Q701();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - রেফার করেছিলেন</option>
+                <option value="2">২ - বাড়িতে চিকিৎসা দিয়েছিলেন</option>
+            </select>
+
+            <div id="DA2_Q702Div" style="display:none;">
+            <label for="DA2_Q702">Q7.02 আপনি কি কোনও ওষুধ দিয়েছিলেন?</label>
+            <select id="DA2_Q702" name="DA2_Q702"  onchange="DA2_Q702();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+            </div>
+
+            <div id="DA2_Q703Div" style="display:none;">
+            <label for="DA2_Q703">Q7.03 আপনি কি কোনও অ্যান্টিবায়োটিক দিয়েছিলেন অথবা অ্যান্টিবায়োটিক খাওয়াতে উপদেশ দিয়েছিলেন? যদি ’হ্যাঁ’ হয়, তবে নিচে বিস্তারিত তথ্য প্রদান করুন।</label>
+            <select id="DA2_Q703" name="DA2_Q703">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+            </div>
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_18" onclick="DA_2_Back_18();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_18" onclick="DA_2_next_18();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+
+
+
+    <!--DA2_Q501 page-->
+    <div data-role="page" id="DA2_Q704_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 7. সিএইচসিপি যে চিকিৎসা দিয়েছিল. Child ID - <span id="DA2_19"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA2_Q704List">নিচের বাটনে ক্লিক করে যে ঔষধ গুলো শিশুকে দেয়া হয়েছে, তাঁর সঠিক সময়কাল এবং দিনে কতবার লিখুন। </label>
+        <div id="DA2_Q704List" style="width:100%; float:left; text-align:center; font-size:1.3vw;">
+            <div onclick="DA2_Q704aSel();" style="overflow:hidden; height:3vw; width:13vw; padding:0.3vw; float:left; border-radius:0.5vw; background-color:#0CF;">অ্যামোক্সিসিলিন</div>
+            <div onclick="DA2_Q704bSel();" style="overflow:hidden; height:3vw; width:13vw; padding:0.3vw; float:left; border-radius:0.5vw; background-color:#0CF; margin-left:0.5vw;">কো-ট্রাইমোক্সাজল</div>
+            <div onclick="DA2_Q704cSel();" style="overflow:hidden; height:3vw; width:13vw; padding:0.3vw; float:left; border-radius:0.5vw; background-color:#0CF; margin-left:0.5vw;">অ্যাজিথ্রোমাইসিন</div>
+            <div onclick="DA2_Q704dSel();" style="overflow:hidden; height:3vw; width:13vw; padding:0.3vw; float:left; border-radius:0.5vw; background-color:#0CF; margin-left:0.5vw;">সেফিক্সিম</div>
+            <div id="DA2_Q704eSel" style="overflow:hidden; height:3vw; width:13vw; padding:0.3vw; float:left; border-radius:0.5vw; background-color:#0CF; margin-left:0.5vw;">১ম অন্যান্য</div>
+            <div id="DA2_Q704fSel" style="overflow:hidden; height:3vw; width:13vw; padding:0.3vw; float:left; border-radius:0.5vw; background-color:#0CF; margin-left:0.5vw;">২য় অন্যান্য</div>
+        </div>
+
+
+
+
+            <div id="DA2_Q704aHide"   style="display:none; width:100%; float:left; margin-top:2vw;">
+                <label for="DA2_Q704a">Q7.04a অ্যামোক্সিসিলিন</label>
+                <div style="float:left; width:5vw; text-align:center;">
+                    <input type="hidden" id="DA2_Q704a" readonly />
+                    <input type="text" id="DA2_Q704aDisplay" readonly />
+ <!--
+            <select id="DA2_Q704a" name="DA2_Q704a" onchange="DA2_Q704a_No();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">১ - হ্যাঁ</option>
+                <option value="2">২ - না</option>
+            </select>
+-->
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+            <input type="number" id="DA2_Q704a_times" name="DA2_Q704a_times" placeholder="দিনে কতবার। যেমনঃ 3"/>
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+            <input type="number" id="DA2_Q704a_day" name="DA2_Q704a_day" placeholder="সময়কাল। যেমনঃ 07"/>
+                </div>
+
+                <div style="float:left; width:30vw; margin-left:1vw;">
+                   <input onclick="Remove_DA2_Q704a();" type="text" readonly style="background-color:#09C;" value="এই ঔষধ লিস্ট থেকে সরাতে চাই">
+                </div>
+            </div>
+
+
+
+
+            <div id="DA2_Q704bHide"   style="display:none; width:100%; float:left; margin-top:2vw;">
+                <label for="DA2_Q704b">Q7.04b কো-ট্রাইমোক্সাজল</label>
+                <div style="float:left; width:5vw; text-align:center;">
+
+                    <input type="hidden" id="DA2_Q704b" readonly />
+                    <input type="text" id="DA2_Q704bDisplay" readonly />
+ <!--
+                    <select id="DA2_Q704b" name="DA2_Q704b" onchange="DA2_Q704b_No();">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">১ - হ্যাঁ</option>
+                        <option value="2">২ - না</option>
+                    </select> -->
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704b_times" name="DA2_Q704b_times" placeholder="দিনে কতবার। যেমনঃ 3"/>
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704b_day" name="DA2_Q704b_day" placeholder="সময়কাল। যেমনঃ 07"/>
+                </div>
+
+                <div style="float:left; width:30vw; margin-left:1vw;">
+                    <input onclick="Remove_DA2_Q704b();" type="text" readonly style="background-color:#09C;" value="এই ঔষধ লিস্ট থেকে সরাতে চাই">
+                </div>
+
+            </div>
+
+
+                <div id="DA2_Q704cHide"   style="display:none; width:100%; float:left; margin-top:2vw;">
+                <label for="DA2_Q704c">Q7.04c অ্যাজিথ্রোমাইসিন</label>
+                <div style="float:left; width:5vw; text-align:center;">
+                    <input type="hidden" id="DA2_Q704c" readonly />
+                    <input type="text" id="DA2_Q704cDisplay" readonly />
+                    <!--<select id="DA2_Q704c" name="DA2_Q704c" onchange="DA2_Q704c_No();">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">১ - হ্যাঁ</option>
+                        <option value="2">২ - না</option>
+                    </select>-->
+
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704c_times" name="DA2_Q704c_times" placeholder="দিনে কতবার। যেমনঃ 3"/>
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704c_day" name="DA2_Q704c_day" placeholder="সময়কাল। যেমনঃ 07"/>
+                </div>
+
+                <div style="float:left; width:30vw; margin-left:1vw;">
+                    <input onclick="Remove_DA2_Q704c();" type="text" readonly style="background-color:#09C;" value="এই ঔষধ লিস্ট থেকে সরাতে চাই">
+                </div>
+
+            </div>
+
+
+
+
+            <div id="DA2_Q704dHide"   style="display:none; width:100%; float:left; margin-top:2vw;">
+                <label for="DA2_Q704d">Q7.04d সেফিক্সিম</label>
+                <div style="float:left; width:5vw; text-align:center;">
+                    <input type="hidden" id="DA2_Q704d" readonly />
+                    <input type="text" id="DA2_Q704dDisplay" readonly />
+
+
+                   <!-- <select id="DA2_Q704d" name="DA2_Q704d" onchange="DA2_Q704d_No();">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">১ - হ্যাঁ</option>
+                        <option value="2">২ - না</option>
+                    </select>-->
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704d_times" name="DA2_Q704d_times" placeholder="দিনে কতবার। যেমনঃ 3"/>
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704d_day" name="DA2_Q704d_day" placeholder="সময়কাল। যেমনঃ 07"/>
+                </div>
+
+                <div style="float:left; width:30vw; margin-left:1vw;">
+                    <input onclick="Remove_DA2_Q704d();" type="text" readonly style="background-color:#09C;" value="এই ঔষধ লিস্ট থেকে সরাতে চাই">
+                </div>
+
+            </div>
+
+
+
+
+
+
+                <div id="DA2_Q704eHide"   style="display:none; width:100%; float:left; margin-top:2vw;">
+                <label for="DA2_Q704e">Q7.04e অন্যান্য</label>
+                    <div style="float:left; width:10vw; text-align:center;">
+<!--                    <input type="text" id="DA2_Q704e" name="DA2_Q704e" placeholder="অন্যান্য কোড লিখুন"/>-->
+                    <select id="DA2_Q704e" name="DA2_Q704e">
+                        <option value="">  e. অন্যান্য অ্যান্টিবায়োটিক</option>
+                        <option value="01">Amikacin (Injection)</option>
+                      <!--  <option value="02">Amoxicillin</option>-->
+                        <option value="03">Amoxicillin + Clavulanic Acid</option>
+                        <!--<option value="04">Azithromycin</option>-->
+                        <option value="05">Cefaclor</option>
+                        <option value="06">Cefadroxil</option>
+                        <!--<option value="07">Cefixime</option>-->
+                        <option value="08">Cefotaxime (Injection)</option>
+                        <option value="09">Cefpodoxime</option>
+                        <!--<option value="10">Cefpodoxime</option>-->
+                        <option value="11">Ceftazidime</option>
+                        <option value="12">Ceftriaxone (Injection)</option>
+                        <option value="13">Cefuroxime</option>
+                        <option value="14">Cefuroxime + Clavulanic Acid</option>
+                        <option value="15">Ciprofloxacin</option>
+                        <option value="16">Clarithromycin</option>
+                        <option value="17">Flucloxacillin</option>
+                        <option value="18">Gentamicin (Injection)</option>
+                        <option value="19">Levofloxacin</option>
+                        <option value="20">Meropenam (Injection)</option>
+                        <option value="21">Metronidazole</option>
+                        <option value="22">Moxifloxacin</option>
+                        <option value="23">Sulfamethoxazole + Trimethoprim</option>
+                        <option value="24">Ceftibuten</option>
+                    </select>
+
+
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704e_times" name="DA2_Q704e_times" placeholder="দিনে কতবার। যেমনঃ 3"/>
+                </div>
+
+                <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704e_day" name="DA2_Q704e_day" placeholder="সময়কাল। যেমনঃ 07"/>
+                </div>
+
+                <div style="float:left; width:30vw; margin-left:1vw;">
+                    <input id="Remove_DA2_Q704e" readonly style="background-color:#09C;" value="এই ঔষধ লিস্ট থেকে সরাতে চাই">
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+                <div id="DA2_Q704fHide"   style="display:none; width:100%; float:left; margin-top:2vw;">
+                <label for="DA2_Q704f">Q7.04f অন্যান্য</label>
+                    <div style="float:left; width:10vw; text-align:center;">
+<!--                    <input type="text" id="DA2_Q704f" name="DA2_Q704f" placeholder="অন্যান্য কোড লিখুন"/>-->
+                    <select id="DA2_Q704f" name="DA2_Q704f">
+                        <option value="">  f. অন্যান্য অ্যান্টিবায়োটিক</option>
+                        <option value="01">Amikacin (Injection)</option>
+                        <!--  <option value="02">Amoxicillin</option>-->
+                        <option value="03">Amoxicillin + Clavulanic Acid</option>
+                        <!--<option value="04">Azithromycin</option>-->
+                        <option value="05">Cefaclor</option>
+                        <option value="06">Cefadroxil</option>
+                        <!--<option value="07">Cefixime</option>-->
+                        <option value="08">Cefotaxime (Injection)</option>
+                        <option value="09">Cefpodoxime</option>
+                        <!--<option value="10">Cefpodoxime</option>-->
+                        <option value="11">Ceftazidime</option>
+                        <option value="12">Ceftriaxone (Injection)</option>
+                        <option value="13">Cefuroxime</option>
+                        <option value="14">Cefuroxime + Clavulanic Acid</option>
+                        <option value="15">Ciprofloxacin</option>
+                        <option value="16">Clarithromycin</option>
+                        <option value="17">Flucloxacillin</option>
+                        <option value="18">Gentamicin (Injection)</option>
+                        <option value="19">Levofloxacin</option>
+                        <option value="20">Meropenam (Injection)</option>
+                        <option value="21">Metronidazole</option>
+                        <option value="22">Moxifloxacin</option>
+                        <option value="23">Sulfamethoxazole + Trimethoprim</option>
+                        <option value="24">Ceftibuten</option>
+                    </select>
+
+
+
+
+                </div>
+
+                    <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704f_times" name="DA2_Q704f_times" placeholder="দিনে কতবার। যেমনঃ 3"/>
+                </div>
+
+                    <div style="float:left; width:23vw; margin-left:1vw;">
+                    <input type="number" id="DA2_Q704f_day" name="DA2_Q704f_day" placeholder="সময়কাল। যেমনঃ 07"/>
+                </div>
+
+                    <div style="float:left; width:30vw; margin-left:1vw;">
+                        <input id="Remove_DA2_Q704f" readonly style="background-color:#09C;" value="এই ঔষধ লিস্ট থেকে সরাতে চাই">
+                    </div>
+
+            </div>
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_19" onclick="DA_2_Back_19();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_19" onclick="DA_2_next_19();" value="Next"/>
+
+            <div style="float:right; display:none;">
+                <input onclick="cancelForm();" type="button" data-role="button" data-inline="true" data-theme="d" value="Cancel Form" style="color:#999; background-color:#F00;"/>
+            </div>
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+
+
+
+
+
+
+    <!--DA2_Q501 page-->
+    <div data-role="page" id="DA2_Q801_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - 8. জন্মগত কোন সমস্যা. Child ID - <span id="DA2_20"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+                <label for="DA2_Q801">Q8.01 শিশুটির কি জন্মগত কোনও ত্রুটি আছে?</label>
+                    <select id="DA2_Q801" name="DA2_Q801">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">১ - হ্যাঁ</option>
+                        <option value="2">২ - না</option>
+                    </select>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_20" onclick="DA_2_Back_20();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_20" onclick="DA_2_next_20();" value="Next"/>
+
+
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+
+    <!--DA2_Q501 page-->
+    <div data-role="page" id="DA2_Q901_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA2 - রিভিউ</h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+        <div style="display:none;">
+            <label for="DA2_Q901">Q9.00 শারীরিক পরীক্ষা/সাক্ষাৎকার সমাপ্তির সময়</label>
+            <input type="text" id="DA2_Q901" name="DA2_Q901" readonly/>
+            <!--<input type="date" id="DA2_Q901" name="DA2_Q901"/>-->
+        </div>
+
+
+            <div id="ifCheckYes" style=" display:none; border-radius:1vw; margin-bottom:1vw; width:100%; float:left; height:auto; overflow:hidden; background-color:#ffcfcf; padding:0.5vw;">
+            <label for="Review_Q401">নিচে কিছু গুরুত্বপূর্ণ তথ্য দেয়া হল, যা আপনি এই শিশুর জন্য এন্ট্রি দিয়েছেন। তথ্য গুলো একবার দেখে নিশ্চিত করুন, যে তথ্য গুল সঠিক আছে এবং
+                SAVE বাটনে ক্লিক করে ফর্মটি SAVE করুন। যদি তথ্য ভুল থাকে তাহলে ওই তথ্যের উপর ক্লিক করে পুনরায় এন্ট্রি দিন।</label>
+            </div>
+
+            <div id="ifCheckNo" style=" display:none; border-radius:1vw; margin-bottom:1vw; width:100%; float:left; height:auto; overflow:hidden; background-color:#ffcfcf; padding:0.5vw;">
+                <label for="Review_Q401">নিচের SAVE বাটনে ক্লিক করে ডাটা SAVE করুন।</label>
+            </div>
+
+<a href="#DA2_Q401_page">
+            <div id="Review_DA2_Q401_page" style="display:none; background-color:#edfffe;  border-radius:1vw; float:left; width:100%; height:auto; overflow:hidden; padding:0.5vw;">
+
+            <label for="Review_Q401" style="font-weight:bold; font-size:2vw; margin-bottom:2vw;">Section 4</label>
+            <label for="Review_Q401">Q4.01 শিশুর বয়সের শ্রেণী </label>
+            <input type="text" readonly id="Review_Q401"/>
+
+            <label for="Review_Q402a">Q4.02a শিশুটির শ্বাস প্রশ্বাসের হার ১ম পরিমাপ </label>
+            <input type="text" readonly id="Review_Q402a"/>
+
+            <label for="Review_Q402a">Q4.02b শিশুটির শ্বাস প্রশ্বাসের হার ২য় পরিমাপ </label>
+            <input type="text" readonly id="Review_Q402b"/>
+
+            <label for="Review_Q403">Q4.03  দ্রুত শ্বাসের লক্ষণ আছে। পরিমাপের সময় শিশু কি অবস্তায় ছিল?</label>
+            <input type="text" readonly id="Review_Q403"/>
+
+            <label for="Review_Q404">Q4.04 শ্বাস নেয়ার সময় বুকের নিচের অংশ দেবে যায়।</label>
+            <input type="text" readonly id="Review_Q404"/>
+
+            <label for="Review_Q405">Q4.05 শিশুটি কি আপনার সামনে কেশেছে?</label>
+            <input type="text" readonly id="Review_Q405"/>
+            </div>
+</a>
+
+
+
+            <div id="Review_DA2_Q501_page"  style="display:none; background-color:#edfffe;  border-radius:1vw; float:left; width:100%; height:auto; overflow:hidden; padding:0.5vw; margin-top:1vw;" onclick="Review_DA2_Q501_page();">
+
+                <label for="Review_Q501" style="font-weight:bold; font-size:2vw; margin-bottom:2vw;">Section 5</label>
+                <label for="Review_Q501">Q5.01 স্ট্রাইডর  </label>
+                <input type="text" readonly id="Review_Q501"/>
+
+                <label for="Review_Q502">Q5.02 গ্রানটিং </label>
+                <input type="text" readonly id="Review_Q502"/>
+
+                <label for="Review_Q503">Q5.03 হেড নোডিং </label>
+                <input type="text" readonly id="Review_Q503"/>
+
+                <label for="Review_Q504">Q5.04 ট্রাকিয়াল টাগিং </label>
+                <input type="text" readonly id="Review_Q504"/>
+
+                <label for="Review_Q505">Q5.05  ন্যাজাল ফ্ল্যারিং </label>
+                <input type="text" readonly id="Review_Q505"/>
+
+                <label for="Review_Q506">Q5.06  ইন্টারকোস্টাল রিট্রাকসন </label>
+                <input type="text" readonly id="Review_Q506"/>
+            </div>
+
+
+<a href="#DA2_Q704_page">
+            <div id="Review_DA2_Q704a_page" style="display:none; background-color:#edfffe;  border-radius:1vw; float:left; width:100%; height:auto; overflow:hidden; padding:0.5vw; margin-top:1vw;">
+
+                <label for="Review_Q704a" style="font-weight:bold; font-size:2vw; margin-bottom:2vw;">Section 7</label>
+                <label for="Review_Q704a">Q7.04a অ্যামোক্সিসিলিন</label>
+
+                <div style="width:100%; float:left; margin-bottom:2vw;">
+                <div style="width:18vw; float:left; overflow:hidden;">
+                <label for="Review_Q704a">হ্যাঁ/না</label>
+                <input type="text" readonly id="Review_Q704a"/>
+                </div>
+                <div style="width:18vw; float:left; overflow:hidden; margin-left:1vw;">
+                <label for="Review_Q704aDay">কত দিন</label>
+                <input type="text" readonly id="Review_Q704aDay"/>
+                </div>
+                <div style="width:20vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704aTime">দিনে কতবার</label>
+                <input type="text" readonly id="Review_Q704aTime"/>
+                </div>
+                </div>
+
+
+                <label for="Review_Q704b">Q7.04b কো-ট্রাইমোক্সাজল</label>
+
+                <div style="width:100%; float:left;margin-bottom:2vw;">
+                <div style="width:18vw; float:left; overflow:hidden;">
+                <label for="Review_Q704b">হ্যাঁ/না</label>
+                <input type="text" readonly id="Review_Q704b"/>
+                </div>
+                <div style="width:18vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704bDay">কত দিন</label>
+                <input type="text" readonly id="Review_Q704bDay"/>
+                </div>
+                <div style="width:20vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704bTime">দিনে কতবার</label>
+                <input type="text" readonly id="Review_Q704bTime"/>
+                </div>
+                </div>
+
+                <label for="Review_Q704c">Q7.04c অ্যাজিথ্রোমাইসিন</label>
+
+                <div style="width:100%; float:left;margin-bottom:2vw;">
+                <div style="width:18vw; float:left; overflow:hidden;">
+                <label for="Review_Q704c">হ্যাঁ/না</label>
+                <input type="text" readonly id="Review_Q704c"/>
+                </div>
+                <div style="width:18vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704cDay">কত দিন</label>
+                <input type="text" readonly id="Review_Q704cDay"/>
+                </div>
+                <div style="width:20vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704cTime">দিনে কতবার</label>
+                <input type="text" readonly id="Review_Q704cTime"/>
+                </div>
+                </div>
+
+
+                <label for="Review_Q704d">Q7.04d সেফিক্সিম</label>
+
+                <div style="width:100%; float:left;margin-bottom:2vw;">
+                <div style="width:18vw; float:left; overflow:hidden;">
+                <label for="Review_Q704d">হ্যাঁ/না</label>
+                <input type="text" readonly id="Review_Q704d"/>
+                </div>
+                <div style="width:18vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704dDay">কত দিন</label>
+                <input type="text" readonly id="Review_Q704dDay"/>
+                </div>
+                <div style="width:20vw; float:left; overflow:hidden;margin-left:1vw;">
+                <label for="Review_Q704dTime">দিনে কতবার</label>
+                <input type="text" readonly id="Review_Q704dTime"/>
+                </div>
+                </div>
+
+            </div>
+</a>
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_Back_21" onclick="DA_2_Back_21();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_2_next_21" onclick="addDataD2();" value="Save"/>
+
+
+        </div>    <!--/main content-->
+    </div>
+    <!--/DA2_Q404 page-->
+
+
+    <div data-role="dialog" id="DA2_cancel" data-theme="d">
+        <div data-role="header">
+            <h1>DA2 Assessment</h1>
+        </div>
+        <div data-role="main" class="ui-content" style="background-color:#F30; color:#FFF;">
+            আপনি কি নিশ্চিত DA2 Assessment ফর্ম, এই পর্যায়ে এসে অসম্পূর্ণ করে Save দিতে চাচ্ছেন?
+            <input onclick="D2CancelFormYes();" type="button" data-role="button" value="হ্যাঁ">
+            <input onclick="D2CancelFormNO();" type="button" data-role="button" value="না">
+        </div>
+    </div>
+
+
+
+
+
+    <div data-role="dialog" id="DA3_start" data-theme="d">
+        <div data-role="header">
+            <h1>DA3 ফর্ম</h1>
+            <div data-role="main" class="ui-content" >
+                <label for="da3_show">নিচের বাটনে ক্লিক করে DA3 ফর্ম পূরণ করুণ।</label>
+                <a href="#DA3_1_page">
+                    <input id="da3_show" type="button" data-role="button" value="DA3 Form">
+                </a>
+            </div>
+        </div><!--/headder-->
+    </div>
+
+
+    <div data-role="page" id="DA3_1_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - ঠিকানা এবং সনাক্তকরণ তথ্যাবলী. Child ID - <span id="DA3_1"></span></h1>
+        </div><!--/headder-->
+
+
+        <a href="#FormSelection">
+        <input type="button" data-role="button" value="DA3 ফর্মটি কিছুক্ষণ পরে এন্ট্রি দিতে চাই।  বিঃদ্র এই আইডি, আজকে অবশ্যই এন্ট্রি দিতে হবে।"/>
+        </a>
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+
+<label for="da3_childID">শিশুর আইডি</label>
+            <input type="text" id="da3_childID" readonly>
+
+
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_1" onclick="DA_3_Next_1();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA3_2_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী. Child ID - <span id="DA3_2"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q111"> Q1.11 মায়ের  পিআইডি </label>
+            <input type="number" id="DA3_Q111"  readonly/>
+
+            <label for="DA3_Q107"> Q1.07 শিশুর পি আইডি</label>
+            <input type="number" id="DA3_Q107" name="DA3_Q107" readonly/>
+
+            <div id="DA3_childInfoGet" style="display:none;">
+            <input id="DA3_getDataFromPCV" type="button" data-mini="true" value="শিশুর তথ্য" onclick="D3_PCVDATA();">
+            </div>
+
+            <label for="DA3_Q101_code"> Q1.01 উপজেলার কোড</label>
+            <input type="number" id="DA3_Q101_code" readonly/>
+
+            <label for="DA3_Q102_code"> Q1.02 ইউনিয়নের কোড  </label>
+            <input type="number" id="DA3_Q102_code" readonly/>
+
+            <label for="DA3_Q103_code"> Q1.03 গ্রামের কোড </label>
+            <input type="text" id="DA3_Q103_code" readonly/>
+
+            <label for="DA3_Q104_code"> Q1.04 বাড়ির কোড  </label>
+            <input type="number" id="DA3_Q104_code" readonly/>
+
+            <label for="DA3_Q105_code"> Q1.05 খানার নাম</label>
+            <input type="text" id="DA3_Q105_code"  readonly/>
+
+            <label for="DA3_Q106_code"> Q1.06 কমিউনিটি ক্লিনিকের কোড  </label>
+            <input type="number" id="DA3_Q106_code"  readonly/>
+
+            <label for="DA3_Q108_code"> Q1.08 শিশুর নাম </label>
+            <input type="text" id="DA3_Q108_code"  readonly/>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_back_2" onclick="DA_3_Back_2();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_2" onclick="D3_DuplicateChk();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+
+
+
+    <!--identification_2 page-->
+    <div data-role="page" id="DA3_3_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 1. ঠিকানা এবং সনাক্তকরণ তথ্যাবলী. Child ID - <span id="DA3_3"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q109"> Q1.09 শিশুর মায়ের নাম</label>
+            <input type="text" id="DA3_Q109" name="DA2_Q109" readonly/>
+
+            <label for="DA3_Q110"> Q1.10 মায়ের সিআইডি </label>
+            <input type="number" id="DA3_Q110" name="DA2_Q110" readonly/>
+
+
+            <label for="DA3_Q112"> Q1.12 শিশুর বাবার নাম </label>
+            <input type="text" id="DA3_Q112" name="DA2_Q112" readonly/>
+
+            <label for="DA3_Q113"> Q1.13 শিশুর জন্ম তারিখ </label>
+            <input type="text" id="DA3_Q113" name="DA3_Q113" readonly/>
+
+            <label for="DA3_Q114"> Q1.14 শিশুর বয়স </label>
+            <input type="number" id="DA3_Q114" readonly/>
+
+            <label for="DA3_Q115"> Q1.15 শিশুটি কি ছেলে না মেয়ে?</label>
+            <input type="number" id="DA3_Q115" name="DA3_Q115" readonly/>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_3" onclick="DA_3_Back_3();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_3" onclick="DA_3_next_3();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA3_4_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 1. সিএইচসিপির কোড এবং সাক্ষাৎকার শুরুর তারিখ, সময়. Child ID - <span id="DA3_4"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q116"> Q1.16 সিএইচসিপির কোড</label>
+            <input type="text" id="DA3_Q116" readonly/>
+
+            <label for="DA3_Q117Date"> Q1.17 সাক্ষাৎকার শুরুর তারিখ</label>
+           <input type="text" id="DA3_Q117Date" readonly/>
+            <!-- <input type="date" id="DA3_Q117Date"/>-->
+
+            <label for="DA3_Q117Time"> Q1.17 সাক্ষাৎকার শুরুর সময়</label>
+            <input type="text" id="DA3_Q117Time" readonly/>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_4" onclick="DA_3_Back_4();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_4" onclick="DA_3_next_4();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+    <div data-role="page" id="DA3_5_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_5"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q201">ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং (অনুগ্রহ করে ছবিতে শব্দ রেকর্ডিং-এর ক্রম বা ধারাবাহিকতা দেখুন) </label>
+            <label for="DA3_Q201"> Q2.01 রেকর্ডিং শুরুর সময়</label>
+            <input type="text" id="DA3_Q201" readonly/>
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_5" onclick="DA_3_Back_5();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_5" onclick="DA_3_next_5();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+<div data-role="page" id="DA3_5_1_page" data-theme="d">
+    <!--headder-->
+    <div data-role="header">
+        <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং</h1>
+    </div><!--/headder-->
+
+    <!--main content-->
+    <div data-role="main" class="ui-content">
+
+        <label for="DA3_Q202">ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং (অনুগ্রহ করে ছবিতে শব্দ রেকর্ডিং-এর ক্রম বা ধারাবাহিকতা দেখুন) </label>
+        <label for="DA3_Q202"> Q2.02 আপনি কি ফুসফুসের শব্দ রেকর্ডিং করতে পেরেছেন?</label>
+        <select id="DA3_Q202">
+            <option value="">যে কোন একটি নির্বাচন করুন</option>
+            <option value="1">হ্যাঁ </option>
+            <option value="2">না</option>
+        </select>
+
+
+        <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" onclick="DA_3_Back_5_1();" value="Back"/>
+        <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" onclick="DA_3_next_5_1();" value="Next"/>
+
+    </div>    <!--/main content-->
+</div>
+
+
+    <div data-role="page" id="DA3_6_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_6"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q202a"> Q2.02 রেকর্ডিং কি শেষ হয়েছে এবং শুনে নিশ্চিত করা হয়েছে?</label>
+
+
+            <div class="ui-grid-c">
+                    <div class="ui-block-a" style="width:40vw;"><div class="ui-bar ui-bar-a" style="height:60px;">A - পজিশন ১ঃ শিশুর পিঠের বাম পাশে</div></div>
+                    <div class="ui-block-b">
+                <div class="ui-bar ui-bar-a" style="height:60px;">
+                <select id="DA3_Q202a">
+                    <option value="">একটি নির্বাচন করুন</option>
+                    <option value="1">হ্যাঁ</option>
+                    <option value="2">না</option>
+                </select>
+                </div></div>
+                <!--
+                <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><input type="number" id="DA3_Q202a2"></div></div>
+                -->
+
+
+
+                <div class="ui-block-a" style="width:40vw;"><div class="ui-bar ui-bar-a" style="height:60px">B - পজিশন ২ঃ শিশুর পিঠের ডান পাশে</div></div>
+                    <div class="ui-block-b">
+                <div class="ui-bar ui-bar-a" style="height:60px">
+                    <select id="DA3_Q202b">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">হ্যাঁ</option>
+                        <option value="2">না</option>
+                    </select>
+                </div></div>
+                <!--
+                <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><input type="number" id="DA3_Q202b2"></div></div>
+                -->
+
+
+
+
+                <div class="ui-block-a" style="width:40vw;"><div class="ui-bar ui-bar-a" style="height:60px">C - পজিশন ৩ঃ শিশুর বুকের বাম পাশে (হৃৎপিন্ডের উপরের দিকে)</div></div>
+                    <div class="ui-block-b">
+                <div class="ui-bar ui-bar-a" style="height:60px">
+                    <select id="DA3_Q202c">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">হ্যাঁ</option>
+                        <option value="2">না</option>
+                    </select>
+                </div></div>
+                <!--
+                <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><input type="number" id="DA3_Q202c2"></div></div>
+                -->
+
+
+
+                <div class="ui-block-a" style="width:40vw;"><div class="ui-bar ui-bar-a" style="height:60px">D - পজিশন ৪ঃ শিশুর বুকের ডান পাশে</div></div>
+                    <div class="ui-block-b">
+                <div class="ui-bar ui-bar-a" style="height:60px">
+                    <select id="DA3_Q202d">
+                        <option value="">একটি নির্বাচন করুন</option>
+                        <option value="1">হ্যাঁ</option>
+                        <option value="2">না</option>
+                    </select>
+                </div></div>
+                <!--
+                <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><input type="number" id="DA3_Q202d2"></div></div>
+                -->
+
+
+            </div><!-- /grid-b -->
+
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_6" onclick="DA_3_Back_6();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_6" onclick="DA_3_next_6();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+
+    <div data-role="page" id="DA3_7_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_7"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q203"> Q2.03 রেকর্ডিং শেষ করার সময়</label>
+            <input type="text" id="DA3_Q203" readonly/>
+            <!--  <input type="text" id="DA3_Q203"/>-->
+
+
+              <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_7" onclick="DA_3_Back_7();" value="Back"/>
+              <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_7" onclick="DA_3_next_7();" value="Next"/>
+
+          </div>    <!--/main content-->
+    </div>
+
+
+
+
+    <div data-role="page" id="DA3_8_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_8"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q204"> Q2.04 আপনি যদি চারটি পজিশনের সবগুলোতে শব্দ রেকর্ড করতে না পারেন, তবে কেন পারেননি তা ব্যাখ্যা করুন। </label>
+            <select id="DA3_Q204">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">শিশুটি সহযোগীতা করেনি </option>
+                <option value="2">অভিভাবক সম্মতি প্রত্যাহার করেছিল </option>
+                <option value="3">স্টেথোস্কোপটি কাজ করছিল না</option>
+               <!-- <option value="4">প্রযোজ্য নয় (সফলভাবে রেকর্ডিং সম্পন্ন হয়েছে)  </option>-->
+                <option value="7">অন্যান্য (উল্লেখ করুন) </option>
+            </select>
+
+
+            <div id="DA3_Q204OHide" style="display:none;">
+            <label for="DA3_Q204O">অন্যান্য এর সঠিক কোড দিন।</label>
+            <input type="text" id="DA3_Q204O">
+            </div>
+
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_8" onclick="DA_3_Back_8();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_8" onclick="return DA_3_next_8();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+
+    <div data-role="page" id="DA3_9_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_9"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q205"> Q2.05 ফুসফুসের শব্দ রেকর্ডিং-এর সময় শিশুটির সার্বিক অবস্থা কি ছিল? </label>
+            <select id="DA3_Q205">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">শিশুটি পুরো সময় শান্ত ছিল এবং সহযোগিতা করেছিল </option>
+                <option value="2">সহযোগিতা করেছিল তবে কথা বলছিল</option>
+                <option value="3">শুরুতে সহযোগিতা করেছিল তবে পরে অশান্ত হয়ে গিয়েছিল (উত্তেজিত কিন্তু কান্নাকাটি করেনি) </option>
+                <option value="4">শুরুতে সহযোগিতা করেছিল তবে পরে অশান্ত হয়ে গিয়েছিল (কান্নাকাটি করছিল) </option>
+                <option value="5">উত্তেজিত ছিল তবে কান্না করেনি </option>
+                <option value="6">কোন সময়ই সহযোগিতা করেনি এবং কান্না করছিল </option>
+            </select>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_9" onclick="DA_3_Back_9();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_9" onclick="DA_3_next_9();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA3_10_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_10"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q206"> Q2.06 সাউন্ড রেকর্ডিং আইডি (এটা শিশুর আইডি) </label>
+            <input type="text" id="DA3_Q206" readonly>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_back_10" onclick="DA_3_Back_10();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_10" onclick="DA_3_Next_10();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA3_11_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 2. ডিজিটাল স্টেথোস্কোপ দিয়ে শব্দ রেকর্ডিং. Child ID - <span id="DA3_11"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q207"> Q2.07 স্মার্টস্কোপ ডিভাইসের কোড </label>
+<!--            <input type="text" id="DA3_Q207">-->
+
+            <input type="text" id="DA3_Q207" name="DA3_Q207" readonly/>
+            <!--<select id="DA3_Q207">
+                <option value="">যে কোন একটি নির্বাচন করুণ</option>
+                <option value="09388B">09388B</option>
+                <option value="09388C">09388C</option>
+                <option value="0938C2">0938C2</option>
+                <option value="09387E">09387E</option>
+                <option value="JHUScope-P1">JHUScope-P1</option>
+                <option value="JHUScope-P2">JHUScope-P2</option>
+                <option value="999999">Not Available</option>
+                <option></option>
+
+            </select>-->
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_back_11" onclick="DA_3_Back_11();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_11" onclick="DA_3_Next_11();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+    <div data-role="page" id="DA3_12_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 3. রক্তে অক্সিজেনের পরিমাণ নির্ণয়. Child ID - <span id="DA3_12"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q301"> Q3.01 আপনি কি শিশুটির রক্তে অক্সিজেনের পরিমান পরিমাপ করতে পেরেছেন? </label>
+            <select id="DA3_Q301">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">হ্যাঁ</option>
+                <option value="2">না</option>
+            </select>
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_back_12" onclick="DA_3_Back_12();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_12" onclick="DA_3_Next_12();" value="Next"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+    <div data-role="page" id="DA3_13_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 3. রক্তে অক্সিজেনের পরিমাণ নির্ণয় . Child ID - <span id="DA3_13"></span></h1>
+        </div><!--/headder-->
+
+        <input type="hidden" id="OxygenRateVerification" />
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q302"> Q3.02 শিশুটির শরীরের যে অংশে এই পরিমাপ করা হয়েছে তা চিহ্নিত করুন </label>
+            <select id="DA3_Q302" onchange="DA3_Q302();">
+                <option value="">একটি নির্বাচন করুন</option>
+                <option value="1">হাতের আঙ্গুল </option>
+                <option value="2">হাতের বৃদ্ধাঙ্গুল </option>
+                <option value="3">পায়ের বৃদ্ধাঙ্গুল </option>
+            </select>
+
+
+            <div id="Q303Hide" style="display:none;">
+            <label for="DA3_Q303"> Q3.03 কক্ষ তাপমাত্রায় অক্সিজেনের পরিমাণ রেকর্ড করুন। যেমনঃ 097  </label>
+            <input type="number" id="DA3_Q303" placeholder="যেমনঃ 097"/>
+
+            <div id="DA3_Q303_1EnHide" style="display:block;">
+            <input onclick="DA3_Q303_1En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি দিব" />
+            </div>
+
+            <div id="DA3_Q303_2EnHide" style="display:none;">
+                <input onclick="DA3_Q303_2En();" type="button" data-role="button" value="দ্বিতীয় এন্ট্রি সম্পূর্ণ হয়েছে।" />
+            </div>
+
+
+            <label for="DA_3_back_13">যদি অক্সিজেনের পরিমাণ <৯০% হয়, তবে শিশুকে উপজেলা স্বাস্থ্য কমপ্লেক্সে রেফার করুন। </label>
+            </div>
+
+            <div>
+                <div style="width:15vw; float:left;">
+            <input data-icon="back" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_3_back_13" onclick="DA_3_Back_13();" value="Back"/>
+                </div>
+                <div id="DA_3_next_13Hide" style=" display:none; width:15vw; float:left;">
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="false" data-theme="d" id="DA_3_next_13" onclick="DA_3_Next_13();" value="Next"/>
+                </div>
+            </div>
+
+            <div style="float:right;">
+                <input onclick="cancelQ303();" type="button" data-role="button" data-inline="true" data-theme="d" value="সম্পূর্ণ নতুন করে এন্ট্রি দিতে চাই" style="color:#999; background-color:#F00;"/>
+            </div>
+
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+    <div data-role="page" id="DA3_14_page" data-theme="d">
+        <!--headder-->
+        <div data-role="header">
+            <h1>DA3 - 4. সমাপ্ত . Child ID - <span id="DA3_14"></span></h1>
+        </div><!--/headder-->
+
+        <!--main content-->
+        <div data-role="main" class="ui-content">
+
+            <label for="DA3_Q400"> Q4.00 সমাপ্তির সময় </label>
+            <input type="text" id="DA3_Q400" readonly/>
+
+
+            <input data-icon="back" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_Back_14" onclick="DA_3_Back_14();" value="Back"/>
+            <input data-icon="arrow-r" type="button" data-role="button" data-inline="true" data-theme="d" id="DA_3_next_14" onclick="addD3();" value="Save"/>
+
+        </div>    <!--/main content-->
+    </div>
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
