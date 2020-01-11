@@ -13,7 +13,7 @@ The study is currently running in Bangladesh, Sylhet. To implement this study we
 7.HTML<br/>
 8.CSS<br/>
 
-#Process
+# Process
 At present, this application is running in 35 android tablets/users, who are responsible for data collection in the study field site. There are two part of this application<br/>
 1.Community clinic<br/>
 2.Community health worker<br/>
@@ -27,4 +27,8 @@ When the server received the data from the comminity clinic, every morning CHW r
 Also CHW visit a child every 2 months and the system generates everyday schedule. If the child is entered today then the child will be eligible to revisit after two months, whcih is calculated by system and generate the schedule for the CHW. The system reduces the workload and now they dont need to follow any hardcopy paper to scheduling the visit.
 
 
-#Data syncronization
+# Data syncronization
+To syncronized the data between tablet and server I have used my own algorithm, which enables user to transfer the data at any time by pressing a single button. In the I have used Javascript to send tha data through URL and in the server PHP catch the data and stored the data, after validating the data. If PHP script found any inconsistant data then, it does not allow user to send the data.
+
+# Mamager system
+The study manager needs to check data in daily basis. So it is difficult to generate everyday data and send it to Data manager. 
