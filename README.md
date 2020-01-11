@@ -34,3 +34,5 @@ To syncronized the data between the tablet and server, I have used my own algori
 The study manager needs to check data on a daily basis. So it is difficult to generate everyday data and send it to study manager. So, I have developed a web-based system, which allows the study manager to check the daily data, statistical report and other QC report. 
 
 
+# Sample code
+Sample source file is provided. This is the only CC part of the system. Server side coding is in the PHP folder.(Only for CC part of the system)
