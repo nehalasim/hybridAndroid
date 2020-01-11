@@ -3,7 +3,7 @@ This study aims to improve the diagnostic accuracy of child pneumonia by using a
 # Project link
 https://www.ed.ac.uk/usher/respire/acute-respiratory-disorders/digital-auscultation-pneumonia-diagnosis
 # System description
-The study is currently running in Bangladesh, Sylhet. To implement this study we have used android based application. To develop the system I have used hybrid technology, which enable me to use this application in multiple platform. To develop the system used technologies are:<br/>
+The study is currently running in Bangladesh, Sylhet. To implement this study we have used android based application. To develop the system I have used hybrid technology, which enables me to use this application in multiple platforms. To develop the system used technologies are:<br/>
 1.JavaScript<br/>
 2.SQLite<br/>
 3.JQuery<br/>
@@ -19,16 +19,18 @@ At present, this application is running in 35 android tablets/users, who are res
 2.Community health worker<br/>
 
 --Community clinic(CC)--<br/>
-This part of the application is used by government emplyee, who is responsible to collect information of the child in the application. If the child meet the criteria and provide the consent for the study then child is considered as an eligible child. End of the they, the data collector use the interent to send the data to sylhet server.<br/>
+This part of the application is used by a government employee, who is responsible to collect information of the child in the application. If the child meets the criteria and provides the consent for the study then the child is considered as an eligible child. End of the day, the data collector use the internet to send the data to the Sylhet server.<br/>
 
 --Community health worker(CHW)--<br/>
-When the server received the data from the comminity clinic, every morning CHW run a function to syncronize the data from the server. The syncronization is done based on eligibility criteria. So, the only eligible children information is syncronized in CHW tab. So every morning they get a list of children and the system generate an automated schedule to visit the children home based on criteria. End of the visit they transferred the data into the sylhet server.
+When the server received the data from the community clinic, every morning CHW run a function to synchronize the data from the server. The synchronization is done based on eligibility criteria. So, the only eligible children information is syncronized in CHW tab. So every morning they get a list of children and the system generate an automated schedule to visit the children home based on criteria. End of the visit they transferred the data into the Sylhet server.
 
-Also CHW visit a child every 2 months and the system generates everyday schedule. If the child is entered today then the child will be eligible to revisit after two months, whcih is calculated by system and generate the schedule for the CHW. The system reduces the workload and now they dont need to follow any hardcopy paper to scheduling the visit.
+Also, CHW visit a child every 2 months and the system generates an everyday schedule. If the child is entered today then the child will be eligible to revisit after two months, which is calculated by system and generate the schedule for the CHW. The system reduces the workload and now they don't need to follow any hardcopy paper to scheduling the visit.
 
 
-# Data syncronization
-To syncronized the data between tablet and server I have used my own algorithm, which enables user to transfer the data at any time by pressing a single button. In the I have used Javascript to send tha data through URL and in the server PHP catch the data and stored the data, after validating the data. If PHP script found any inconsistant data then, it does not allow user to send the data.
+# Data synchronization
+To syncronized the data between the tablet and server, I have used my own algorithm, which enables the user to transfer the data at any time by pressing a single button. In the I have used Javascript to send the data through URL and in the server PHP catch the data and store the data, after validating the data. If the PHP script found any inconsistent data then, it does not allow the user to send the data.
 
-# Mamager system
-The study manager needs to check data in daily basis. So it is difficult to generate everyday data and send it to Data manager. 
+# Manager system
+The study manager needs to check data on a daily basis. So it is difficult to generate everyday data and send it to study manager. So, I have developed a web-based system, which allows the study manager to check the daily data, statistical report and other QC report. 
+
+# System file description
