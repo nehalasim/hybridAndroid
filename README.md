@@ -1,1 +1,1 @@
-# hybridAndroid
+# Hybrid android application Digital Auscultation.
