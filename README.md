@@ -35,4 +35,4 @@ The study manager needs to check data on a daily basis. So it is difficult to ge
 
 
 # Sample code
-Sample source file is provided. This is the only CC part of the system. Server side coding is in the PHP folder.(Only for CC part of the system)
+Sample source file is provided. This is the only CC part of the system. Server side coding is in the PHP.(Only for CC part of the system)
