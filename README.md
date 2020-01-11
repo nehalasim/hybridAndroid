@@ -32,3 +32,5 @@ To syncronized the data between the tablet and server, I have used my own algori
 
 # Manager system
 The study manager needs to check data on a daily basis. So it is difficult to generate everyday data and send it to study manager. So, I have developed a web-based system, which allows the study manager to check the daily data, statistical report and other QC report. 
+
+
