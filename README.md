@@ -28,7 +28,7 @@ Also, CHW visit a child every 2 months and the system generates an everyday sche
 
 
 # Data synchronization
-To syncronized the data between the tablet and server, I have used my own algorithm, which enables the user to transfer the data at any time by pressing a single button. In the I have used Javascript to send the data through URL and in the server PHP catch the data and store the data, after validating the data. If the PHP script found any inconsistent data then, it does not allow the user to send the data.
+To syncronized the data between the tablet and server, I have used my own algorithm, which enables the user to transfer the data at any time by pressing a single button. I have used Javascript to send the data through URL and in the server PHP catch the data and store the data, after validating the data. If the PHP script found any inconsistent data then, it does not allow the user to send the data.
 
 # Manager system
 The study manager needs to check data on a daily basis. So it is difficult to generate everyday data and send it to study manager. So, I have developed a web-based system, which allows the study manager to check the daily data, statistical report and other QC report. 
